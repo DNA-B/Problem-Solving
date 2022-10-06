@@ -34,12 +34,7 @@ int main()
 	{
 		for (int j = 0; j < 2; j++)
 		{
-			room += element_school[i][j] / k;
-
-			if ((element_school[i][j] % k) != 0)
-			{
-				room++;
-			}
+			room += element_school[i][j] - (element_school[i][j] / k);
 		}
 	}
 

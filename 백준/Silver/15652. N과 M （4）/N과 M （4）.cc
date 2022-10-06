@@ -20,8 +20,7 @@ void func(int k) { // 현재 k개까지 수를 택했음.
             arr[k] = i;
             func(k + 1);
         }
-
-        if (k > 0 && arr[k - 1] <= i)
+        else if (arr[k - 1] <= i)
         { // 사용할 수 있으면서 비내림차일 경우
             arr[k] = i; // 수열의 k번째 수를 i로 정함
             func(k + 1); // 다음 수를 정하기 위해 func(k + 1) 호출
