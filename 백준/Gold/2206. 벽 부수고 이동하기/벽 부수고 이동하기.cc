@@ -24,8 +24,8 @@ int bfs()
 
         q.pop();
 
-        if ((cur.first.first == n - 1) && (cur.first.second == m - 1))
-            return cnt; // 도착
+        if ((cur.first.first == n - 1) && (cur.first.second == m - 1)) // 도착
+            return cnt;
 
         for (int dir = 0; dir < 4; dir++)
         {
@@ -35,19 +35,20 @@ int bfs()
             if (nx < 0 || nx >= n || ny >= m || ny < 0)
                 continue; // 범위 밖일 경우
 
-            if (board[nx][ny] == '1' && (cur.second.first) == 0)
+            if (board[nx][ny] == '1' && is_crash == 0) // 벽 있는데 안 부쉈으면
             {
                 vis[nx][ny][is_crash + 1] = 1;
                 q.push({ {nx,ny},{is_crash + 1, cnt + 1} });
             }
-            else if (board[nx][ny] == '0' && vis[nx][ny][is_crash] == 0)
+            else if (board[nx][ny] == '0' && vis[nx][ny][is_crash] == 0) // 벽 없으면
             {
                 vis[nx][ny][is_crash] = 1;
                 q.push({ { nx,ny }, {is_crash, cnt + 1} });
             }
         }
     }
-    // 이 라인까지 왔으면 목적지에 도착하지 못한 것이므로 -1 반환
+    
+    // 도착 못함
     return -1;
 }
 
