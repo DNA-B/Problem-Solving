@@ -12,7 +12,7 @@
 
 using namespace std;
 
-long long golbang(int x, int y)
+long long golbang(double x, double y)
 {
 	return (x + y) * (x - y);
 }
@@ -22,7 +22,7 @@ int main()
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	
-	int x, y;
+	long long x, y;
 
 	cin >> x >> y;
 
