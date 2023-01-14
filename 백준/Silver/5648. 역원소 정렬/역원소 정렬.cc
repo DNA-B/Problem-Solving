@@ -19,16 +19,8 @@ int main()
     {
         cin >> str;
 
-        string tmp = "";
-
-        for (int j = str.length() - 1; j >= 0; j--)
-        {
-            while ((tmp == "") && (str[j] - '0' == 0))
-                j--;
-
-            tmp += str[j];
-        }
-        res[i] = stoll(tmp);
+        reverse(str.begin(), str.end());
+        res[i] = stoll(str);
     }
 
     sort(res.begin(), res.end());
