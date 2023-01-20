@@ -18,7 +18,6 @@ string solution(vector<string> participant, vector<string> completion) {
             is_completion[participant[i]]--;
         else
             answer += participant[i];
-        
     }
     
     return answer;
