@@ -64,7 +64,7 @@ int main()
         }
     }
 
-    for (int i = 0; i < H; i++) // 안 익은 토마토 남아있나 사
+    for (int i = 0; i < H; i++)
     {
         for (int j = 0; j < N; j++)
         {
