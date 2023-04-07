@@ -2,7 +2,6 @@
 
 using namespace std;
 
-const int MX = 100'002;
 const long long INF = 0x7f7f7f7f7f7f;
 
 int N, M, K;
@@ -14,7 +13,7 @@ priority_queue<pair<long long, long long>,
     vector<pair<long long, long long>>,
     greater<pair<long long, long long>>> pq;
 
-void dijk()
+void dijk() // 각 면접장에서 마을까지의 최단 경로
 {
     while (!pq.empty())
     {
@@ -50,7 +49,7 @@ int main()
     }
 
     for (int i = 1; i <= K; i++)
-    {
+    { // 모든 면접장을 시작점으로 두고 다익스트라 1번 진행
         cin >> k;
         d[k] = 0;
         pq.push({ d[k], k });
@@ -58,7 +57,8 @@ int main()
 
     dijk();
 
-    int idx = max_element(d + 1, d + N + 1) - d;
+    // d에 들어있는 것은 각 마을에서 가장 가까운 마을까지의 최단 거리
+    int idx = max_element(d + 1, d + N + 1) - d; 
     cout << idx << "\n";
     cout << d[idx];
 
