@@ -5,24 +5,24 @@ using namespace std;
 
 int arr[1001][1001];
 int mem[1001][1001][4];
-int dy[3] = { -1, 0, 1 };
+int dy[4] = { NULL, -1, 0, 1 };
 int N, M;
 int ans = INF;
 
 int solve(int x, int y, int prev)
 {
-    if (x == N)
+    if (x == N - 1)
         return arr[x][y];
 
     if (mem[x][y][prev] != INF)
         return mem[x][y][prev];
 
-    for (int dir = 0; dir < 3; dir++)
+    for (int dir = 1; dir <= 3; dir++)
     {
         int nx = x + 1;
         int ny = y + dy[dir];
 
-        if (nx > N || ny < 1 || ny > M)
+        if (nx >= N || ny < 0 || ny >= M)
             continue;
         if (dir == prev)
             continue;
@@ -40,14 +40,14 @@ int main()
 
     cin >> N >> M;
 
-    for (int i = 1; i <= N; i++)
-        for (int j = 1; j <= M; j++)
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < M; j++)
             cin >> arr[i][j];
 
     fill(&mem[0][0][0], &mem[1000][1000][3], INF);
 
-    for (int i = 1; i <= M; i++)
-        ans = min(ans, solve(0, i, -1));
+    for (int i = 0; i < M; i++)
+        ans = min(ans, solve(0, i, 0));
 
     cout << ans;
 
