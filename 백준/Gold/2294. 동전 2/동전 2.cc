@@ -22,7 +22,6 @@ int main(void)
         mem[arr[i]] = 1;
     }
 
-    mem[0] = 1;
     for (int i = 0; i < N; i++)
         for (int j = arr[i]; j <= K; j++)
             mem[j] = min(mem[j], mem[j - arr[i]] + 1);
