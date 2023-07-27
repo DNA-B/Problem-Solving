@@ -22,7 +22,7 @@ int main(void)
         for (int j = arr[i]; j <= K; j++)
             mem[j] += mem[j - arr[i]];
 
-    cout << mem[K] << endl;
+    cout << mem[K];
 
     return 0;
 }
