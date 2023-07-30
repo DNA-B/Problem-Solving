@@ -1,43 +1,44 @@
 #include <bits/stdc++.h>
+#define INF 0x3f3f3f3f
+#define MOD 123456789
 
 using namespace std;
 
-int main()
+int M, N;
+int mem[1000001];
+bool is_not_prime[1000001];
+
+void era(int n)
 {
-	ios::sync_with_stdio(0);
-	cin.tie(0);
-	
-	vector<int> v(1000001);
-	int m, n;
+    for (int i = 2; i <= sqrt(n); i++)
+    {
+        if (is_not_prime[i] == true)
+            continue;
 
-	cin >> m >> n;
+        for (int j = i * i; j <= n; j += i)
+            is_not_prime[j] = true;
+    }
+}
 
-	for (int i = 2; i <= n; i++)
-	{
-		v[i] = i;
-	}
+void print_prime(int m, int n)
+{
+    for (int i = m; i <= n; i++)
+    {
+        if (is_not_prime[i] == false)
+            cout << i << "\n";
+    }
+}
 
-	for (int i = 2; i * i <= n; i++) // 에라토스테네스의 체
-	{
-		if (v[i] == 0)
-		{
-			continue;
-		}
-		else
-		{
-			for (int j = i * i; j <= n; j += i) // i*i로 하면 O(nloglogn)
-			{
-				v[j] = 0;
-			}
-		}
-	}
-	
-	for (int i = m; i <= n; i++)
-	{
-		if (v[i] != 0)
-		{
-			cout << v[i] << "\n";
-		}
-	}
-	return 0;
+int main(void)
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    cin >> M >> N;
+
+    is_not_prime[1] = true;
+    era(N);
+    print_prime(M, N);
+
+    return 0;
 }
