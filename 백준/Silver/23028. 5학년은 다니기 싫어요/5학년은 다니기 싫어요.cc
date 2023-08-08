@@ -11,7 +11,7 @@ N학기를 마쳤고 // 전공학점은 A // 총 학점은 B
 */
 
 int N, A, B, X, Y;
-int major, total, left_lec;
+int major, total;
 
 int main(void)
 {
@@ -23,22 +23,17 @@ int main(void)
     major = A;
     total = B;
 
-    while (true)
+    for (int i = 0; N + i < 8; i++)
     {
-        if (N >= 8)
-            break;
-
         cin >> X >> Y;
 
         major += (3 * X);
-        left_lec = 6 - X;
-
-        if (left_lec >= Y)
+        int left_major = 6 - X;
+        
+        if (left_major >= Y)
             total += (3 * X) + (3 * Y);
         else
-            total += (3 * X) + (3 * left_lec);
-
-        N++;
+            total += (3 * X) + (3 * left_major);
     }
 
     if (major >= 66 && total >= 130)
