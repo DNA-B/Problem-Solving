@@ -19,26 +19,17 @@ int main()
 		cin >> str;
 
 		if (str == "0")
-		{
 			return 0;
-		}
 
 		for (int i = 0; i < str.size() / 2; i++)
-		{
 			if (str[i] != str[str.size() - 1 - i])
-			{
 				flag = false;
-			}
-		}
+
 
 		if (flag == true)
-		{
 			cout << "yes\n";
-		}
 		else
-		{
 			cout << "no\n";
-		}
 
 		flag = true;
 	}
