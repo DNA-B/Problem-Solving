@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 #define INF 0x3f3f3f3f
-#define PI 3.1415927
 
 using namespace std;
 
