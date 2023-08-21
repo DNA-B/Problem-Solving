@@ -1,11 +1,4 @@
-#include <iostream>
-#include <cctype>
-#include <cstring>
-#include <cstdlib>
-#include <cmath>
-#include <algorithm>
-#include <string>
-#include <queue>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -15,13 +8,9 @@ using namespace std;
 int fact(int n)
 {
 	if (n == 0)
-	{
 		return 1;
-	}
 	else
-	{
 		return n * fact(n - 1);
-	}
 }
 
 int main()
