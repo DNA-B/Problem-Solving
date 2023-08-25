@@ -24,6 +24,7 @@ int main(void)
     cin.tie(0);
 
     cin >> A >> B;
+    
     AtoB(A, 1);
 
     if (ans == INF)
