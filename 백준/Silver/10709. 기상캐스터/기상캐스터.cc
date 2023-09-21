@@ -40,9 +40,7 @@ int main(void)
     for (int i = 0; i < H; i++)
     {
         for (int j = 0; j < W; j++)
-        {
             cout << ans[i][j] << " ";
-        }
         cout << "\n";
     }
 
