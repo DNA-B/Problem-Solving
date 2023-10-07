@@ -20,10 +20,11 @@ void unionParent(int u, int v)
     u = getParent(u);
     v = getParent(v);
 
-    if (u == v)
+    if (u ==  v)
         return;
 
     parent[u] = v;
+    getParent(u);
 }
 
 int main()
@@ -43,8 +44,7 @@ int main()
         for (int j = 1; j <= n; j++)
         {
             cin >> is_linked;
-
-            if (is_linked)
+            if (is_linked == 1)
                 unionParent(i, j);
         }
     }
