@@ -1,27 +1,22 @@
-#include <iostream>
-#include <cctype>
-#include <cstring>
-#include <cstdlib>
-#include <cmath>
-#include <algorithm>
-#include <string>
+#include <bits/stdc++.h>
 
 using namespace std;
 
+int arr[6];
+int result = 0;
+
 int main() 
 {
-	char arr[6] = { '\0' };
-	int result = 0;
-
+	
 	for (int i = 0; i < 5; i++)
 	{
 		cin >> arr[i];
-		result += (arr[i] - '0') * (arr[i] - '0');
+		result += pow(arr[i], 2);
 	}
 
 	result %= 10;
-
 	cout << result;
+    
 	return 0;
 
 }
