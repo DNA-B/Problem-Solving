@@ -7,8 +7,6 @@ using namespace std;
 
 int N;
 map<string, string> m;
-string max_v = "9999-99-99";
-string min_v = "0000-00-00";
 
 int main()
 {
@@ -31,24 +29,10 @@ int main()
 
         tmp = (year + "-" + month + "-" + day);
         m[tmp] = name;
-
-        if (min_v < tmp)
-            min_v = tmp;
-        if (max_v > tmp)
-            max_v = tmp;
     }
 
-    for (auto item : m)
-    {
-        if (item.first == min_v)
-            cout << item.second << "\n";
-    }
-
-    for (auto item :m)
-    {
-        if (item.first == max_v)
-            cout << item.second << "\n";
-    }
+    cout << (--m.end())->second << "\n";
+    cout << m.begin()->second;
 
     return 0;
 }
