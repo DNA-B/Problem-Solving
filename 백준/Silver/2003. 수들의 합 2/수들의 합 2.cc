@@ -6,9 +6,9 @@
 using namespace std;
 
 int N, M;
-long long acc[100001];
-int p1 = 0, p2 = 1;
-int cnt = 0;
+int arr[10001];
+int cur_sum = 0, cnt = 0;
+int p1 = 0, p2 = 0;
 
 int main()
 {
@@ -17,23 +17,18 @@ int main()
 
     cin >> N >> M;
 
-    for (int i = 1; i <= N; i++)
-    {
-        int x;
-
-        cin >> x;
-        acc[i] = acc[i - 1] + x;
-    }
+    for (int i = 0; i < N; i++)
+        cin >> arr[i];
 
     while (p2 <= N)
     {
-        if (acc[p2] - acc[p1] == M)
-            cnt++;
-
-        if (acc[p2] - acc[p1] <= M)
-            p2++;
+        if (cur_sum >= M)
+            cur_sum -= arr[p1++];
         else
-            p1++;
+            cur_sum += arr[p2++];
+
+        if (cur_sum == M)
+            cnt++;
     }
 
     cout << cnt;
