@@ -19,7 +19,7 @@ int main(void)
     for (int i = 0; i < s.length(); i++)
     {
         if ((N % 2 != 0) && (i == N / 2))
-        {
+        { // 홀수라면 가운데 문자와 (왼쪽, 오른쪽)에서 하나를 바꿀 수 있다.
             mid_char = s[i];
             continue;
         }
@@ -32,7 +32,7 @@ int main(void)
         if (item.second % 2 != 0)
         {
             if ((item.second == 1) && (item.first == mid_char))
-                has_odd = false;
+                has_odd = false; // 만약 (왼쪽, 오른쪽)에 홀수가 있고 그게 중간 문자와 같다면 교환 가능
             else
                 has_odd = true;
         }
