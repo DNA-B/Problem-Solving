@@ -5,14 +5,7 @@ using namespace std;
 
 int T, N;
 int arr[2][100001];
-int mem[2][100001][2]; // {행, 열, 뗐는지 안 뗐는지}
-
-void init() {
-    for (int i = 0; i < 2; i++)
-        for (int j = 0; j < N; j++)
-            for (int k = 0; k < 2; k++)
-                mem[i][j][k] = -1;
-}
+int mem[2][100001];
 
 int main(void)
 {
@@ -24,31 +17,29 @@ int main(void)
     while (T--)
     {
         cin >> N;
-
-        init();
-
         for (int i = 0; i < 2; i++)
-            for (int j = 0; j < N; j++)
+            for (int j = 1; j <= N; j++)
                 cin >> arr[i][j];
 
-        mem[0][0][0] = 0; // X
-        mem[1][0][0] = 0; // X
-        mem[0][0][1] = arr[0][0]; // O
-        mem[1][0][1] = arr[1][0]; // O
+        mem[0][0] = 0;
+        mem[1][0] = 0;
+        mem[0][1] = arr[0][1];
+        mem[1][1] = arr[1][1];
 
-        for (int i = 1; i < N; i++)
-        {
+        for (int j = 2; j <= N; j++)
+        { 
             /*
-            * [x][y][0] -> max([y-1]의 4가지 경우)
-            * [x][y][1] -> max([y-1][0]인 경우, ([대각선 방향][y-1][1]인 경우 + 현재 위치의 점수), [내 앞][y-1][1]인 경우인데 내꺼를 안 떼는 경우)
+            * 현재 위치로 오는 가지수가 2가지 있다.
+            * 1. [내 대각선 방향][j-2] -> 2칸 뛰는 것 
+            * 2. [내 대각선 방향][j-1] -> 1칸 뛰는 것
+            * 이 중에서 max를 취하고 내 스티커 점수를 더하면 된다.
             */
-            mem[0][i][0] = max({ mem[0][i - 1][0], mem[1][i - 1][0], mem[0][i - 1][1], mem[1][i - 1][1] });
-            mem[1][i][0] = max({ mem[0][i - 1][0], mem[1][i - 1][0], mem[0][i - 1][1], mem[1][i - 1][1] });
-            mem[0][i][1] = max({ mem[0][i - 1][0] + arr[0][i], mem[1][i - 1][0] + arr[0][i], mem[1][i - 1][1] + arr[0][i], mem[0][i - 1][1] });
-            mem[1][i][1] = max({ mem[0][i - 1][0] + arr[1][i], mem[1][i - 1][0] + arr[1][i], mem[0][i - 1][1] + arr[1][i], mem[1][i - 1][1] });
+
+            mem[0][j] = max(mem[1][j - 2], mem[1][j - 1]) + arr[0][j];
+            mem[1][j] = max(mem[0][j - 2], mem[0][j - 1]) + arr[1][j];
         }
 
-        cout << max({ mem[0][N - 1][0], mem[0][N - 1][1], mem[1][N - 1][0], mem[1][N - 1][1] }) << "\n";
+        cout << max(mem[0][N], mem[1][N]) << '\n';
     }
 
     return 0;
