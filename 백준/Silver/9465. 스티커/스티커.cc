@@ -4,8 +4,8 @@
 using namespace std;
 
 int T, N;
-int arr[2][1000001];
-int mem[2][1000001][2]; // {행, 열, 뗐는지 안 뗐는지}
+int arr[2][100001];
+int mem[2][100001][2]; // {행, 열, 뗐는지 안 뗐는지}
 
 void init() {
     for (int i = 0; i < 2; i++)
