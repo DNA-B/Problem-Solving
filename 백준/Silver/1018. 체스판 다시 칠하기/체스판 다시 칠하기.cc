@@ -14,24 +14,22 @@
 
 using namespace std;
 
+// 흑, 백 비교 체스판 설정
 vector<string> black = { {"BWBWBWBW"},{"WBWBWBWB"},{"BWBWBWBW"},{"WBWBWBWB"},
 								 {"BWBWBWBW"},{"WBWBWBWB"},{"BWBWBWBW"},{"WBWBWBWB"} };
 vector<string> white = { {"WBWBWBWB"},{"BWBWBWBW"},{"WBWBWBWB"},{"BWBWBWBW"},
 								 {"WBWBWBWB"},{"BWBWBWBW"},{"WBWBWBWB"},{"BWBWBWBW"} };
 
 
-bool in_board(int x, int m)
+bool in_board(int x, int m) // x부터 8칸 검사 가능한지 여부
 {
 	if (x + 7 < m)
-	{
 		return true;
-	}
 	else
-	{
 		return false;
-	}
 }
 
+// 흑, 백 체스판과 비교하며 칠해본 뒤 둘 중 더 적은 수 채택
 void re_paint(vector<string> v, int x, int y, int n, int m, int min)
 {
 	int b_count = 0;
@@ -51,14 +49,9 @@ void re_paint(vector<string> v, int x, int y, int n, int m, int min)
 				for (int j = x; j < x + 8; j++)
 				{
 					if (white[yi][xi] != v[i][j])
-					{		
 						w_count++;
-					}
-					
 					if (black[yi][xi] != v[i][j])
-					{
 						b_count++;
-					}
 					xi++;
 				}
 				xi = 0;
@@ -66,16 +59,14 @@ void re_paint(vector<string> v, int x, int y, int n, int m, int min)
 			}
 
 			if (min > (b_count < w_count ? b_count : w_count))
-			{
 				min = b_count < w_count ? b_count : w_count;
-			}
 
-			return re_paint(v, x + 1, y, n, m, min);
+			return re_paint(v, x + 1, y, n, m, min); // x 증가시키며 오른쪽으로 이동
 	}
 	else if(in_board(x, m) == false)
 	{
 		x = 0;
-		re_paint(v, x, y + 1, n, m, min);
+		re_paint(v, x, y + 1, n, m, min); // x부터 8칸 검사가 안 될 경우 y증가
 	}
 }
 
