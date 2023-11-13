@@ -6,7 +6,6 @@ using namespace std;
 int arr[1001];
 int mem[1001];
 int N;
-int ans = 0;
 
 int main(void)
 {
@@ -26,10 +25,9 @@ int main(void)
 			if (arr[i] < arr[j])
 				mem[i] = max(mem[i], mem[j] + 1);
 		}
-		ans = max(ans, mem[i]);
 	}
 
-	cout << ans;
+	cout << *max_element(mem, mem + N);
 
     return 0;
 }
