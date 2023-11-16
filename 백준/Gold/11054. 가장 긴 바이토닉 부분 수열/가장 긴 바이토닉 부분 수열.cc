@@ -7,32 +7,9 @@ using namespace std;
 int N;
 int ans = -1;
 int arr[1001];
-vector<int> increse;
-vector<int> decrese;
-
-int bitonic(int idx)
-{
-    for (int i = 0; i <= idx; i++)
-    {
-        if (increse.empty() || increse.back() < arr[i])
-            increse.push_back(arr[i]);
-        else
-            *lower_bound(increse.begin(), increse.end(), arr[i]) = arr[i];
-    }
-
-    for (int i = idx; i < N; i++)
-    {
-        if (decrese.empty() || decrese.back() > arr[i])
-            decrese.push_back(arr[i]);
-        else
-            *lower_bound(decrese.begin(), decrese.end(), arr[i], greater<>()) = arr[i];
-    }
-
-    increse.insert(increse.end(), decrese.begin() + 1, decrese.end());
-    return increse.size();
-}
-
-
+int increse[1001];
+int decrese[1001];
+int bitonic[1001];
 
 int main()
 {
@@ -40,19 +17,35 @@ int main()
     cin.tie(0);
 
     cin >> N;
-
     for (int i = 0; i < N; i++)
         cin >> arr[i];
 
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N; i++) // 증가 수열
     {
-        increse.clear();
-        decrese.clear();
-        
-        ans = max(ans, bitonic(i));
+        increse[i] = 1;
+
+        for (int j = 0; j < i; j++)
+        {
+            if (arr[j] < arr[i])
+                increse[i] = max(increse[i], increse[j] + 1);
+        }
     }
 
-    cout << ans;
+    for (int i = N - 1; i >= 0; i--) // 감소 수열
+    {
+        decrese[i] = 1;
+
+        for (int j = N - 1; j > i; j--)
+        {
+            if (arr[j] < arr[i])
+                decrese[i] = max(decrese[i], decrese[j] + 1);
+        }
+    }
+
+    for (int i = 0; i < N; i++)
+        bitonic[i] = increse[i] + decrese[i];
+
+    cout << *max_element(bitonic, bitonic + N) - 1; // K번째 중복 빼주기
 
     return 0;
 }
