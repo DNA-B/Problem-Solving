@@ -1,77 +1,47 @@
-#include <iostream>
-#include <algorithm> 
-#include <string> 
-// #include <cctype> 
-// #include <cmath> 
-// #include <queue>
-// #include<deque>
-// #include <set>
-#include <vector>
-// #include <list>
-#include <stack> 
-// #include <bitset>
+#include <bits/stdc++.h>
 
 using namespace std;
 
+stack<int> st;
+int N, x;
+string order;
+
 int main()
 {
-	ios::sync_with_stdio(0);
-	cin.tie(0);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-	stack<int> st;
-	int push_n;
-	int rep;
-	string order;
+    cin >> N;
 
-	cin >> rep;
+    while (N--)
+    {
+        cin >> order;
 
-	while (rep)
-	{
-		cin >> order;
+        if (order == "push")
+        {
+            cin >> x;
+            st.push(x);
+        }
+        else if (order == "pop")
+        {
+            if (st.empty())
+            {
+                cout << -1 << "\n";
+                continue;
+            }
+            else
+            {
+                cout << st.top() << "\n";
+                st.pop();
+            }
+        }
+        else if (order == "size")
+            cout << st.size() << "\n";
+        else if (order == "empty")
+            cout << st.empty() << "\n";
+        else if (order == "top")
+            cout << (st.empty() ? -1 : st.top()) << "\n";
+    }
 
-		if (order == "push")
-		{
-			cin >> push_n;
-			st.push(push_n);
-		}
-		else if (order == "pop")
-		{
-			if (st.empty())
-			{
-				cout << "-1\n";
-				rep--;
-				continue;
-			}
-			cout << st.top() << "\n";
-			st.pop();
-		}
-		else if (order == "top")
-		{
-			if (st.empty())
-			{
-				cout << "-1\n";
-				rep--;
-				continue;
-			}
-			cout << st.top() << "\n";
-		}
-		else if (order == "empty")
-		{
-			if (st.empty())
-			{
-				cout << "1\n";
-			}
-			else
-			{
-				cout << "0\n";
-			}
-		}
-		else if (order == "size")
-		{
-			cout << st.size() << "\n";
-		}
-		rep--;
-	}
-
-	return 0;
+    return 0;
 }
