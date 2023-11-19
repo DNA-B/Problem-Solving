@@ -23,19 +23,9 @@ int main()
 
         for (int j = 0; j < N; j++)
         {
-            if (arr[i][j] == 'X')
-            {
-                if (cnt >= 2)
-                    garo++;
-
-                cnt = 0;
-            }
-            else
-                cnt++;
+            cnt = arr[i][j] == '.' ? cnt + 1 : 0;
+            garo = (cnt == 2) ? garo + 1 : garo;
         }
-
-        if (cnt >= 2)
-            garo++;
     }
 
     for (int i = 0; i < N; i++)
@@ -44,19 +34,9 @@ int main()
 
         for (int j = 0; j < N; j++)
         {
-            if (arr[j][i] == 'X')
-            {
-                if (cnt >= 2)
-                    sero++;
-
-                cnt = 0;
-            }
-            else
-                cnt++;
+            cnt = arr[j][i] == '.' ? cnt + 1 : 0;
+            sero = (cnt == 2) ? sero + 1 : sero;
         }
-
-        if (cnt >= 2)
-            sero++;
     }
 
     cout << garo << " " << sero;
