@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#define MAX_SIZE ('Z'+ 1)
 
 using namespace std;
 
