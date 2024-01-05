@@ -43,7 +43,6 @@ int main()
 			s.replace(i, 4, "AAAA");
 			i += 3;
 		}
-
 	}
 
 	for (int i = 0; i <= (int)s.size() - 2; i++) // B 치환
