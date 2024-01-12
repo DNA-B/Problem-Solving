@@ -1,35 +1,31 @@
-#include <bits/stdc++.h>
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
 
-using namespace std;
-
-vector<vector<int>> v(10);
-int max_value = -1;
-int x, y;
 
 int main()
 {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    
-    for (int i = 1; i < 10; i++)
-        v[i].resize(10, 0);
+	int a[9][9];
+	int max = -1;
+	int m, n;
 
-    for (int i = 1; i < 10; i++)
-    {
-        for (int j = 1; j < 10; j++)
-        {
-            cin >> v[i][j];
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+			scanf("%d", &a[i][j]);
+	}
 
-            if (v[i][j] > max_value)
-            {
-                max_value = v[i][j];
-                x = i;
-                y = j;
-            }
-        }
-    }
-
-    cout << max_value << "\n" << x << " " << y;
-
-    return 0;
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			if (max < a[i][j])
+			{
+				max = a[i][j];
+				m = i + 1;
+				n = j + 1;
+			}
+		}
+	}
+	printf("%d\n", max);
+	printf("%d %d", m, n);
 }
