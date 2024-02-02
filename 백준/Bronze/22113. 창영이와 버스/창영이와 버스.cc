@@ -23,7 +23,7 @@ int main()
 		for (int j = 1; j <= N; j++)
 			cin >> A[i][j];
 
-	for (int i = 1; i <= M; i++)
+	for (int i = 1; i < M; i++)
 		price += A[chang[i - 1]][chang[i]];
 
 	cout << price;
