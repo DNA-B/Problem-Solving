@@ -4,8 +4,8 @@
 using namespace std;
 
 int N, F, lnum, fnum;
-set<int, greater<int>> max_fret[7];
-int cnt = 0, max = -INT_MAX;
+stack<int> st[7];
+int cnt = 0;
 
 int main()
 {
@@ -20,42 +20,39 @@ int main()
 	{
 		cin >> lnum >> fnum;
 
-		if (max_fret[lnum].empty())
+		if (st[lnum].empty())
 		{
-			max_fret[lnum].insert(fnum);
+			st[lnum].push(fnum);
 			cnt++;
 		}
 		else
 		{
-			if (max_fret[lnum].find(fnum) != max_fret[lnum].end())
+			if (st[lnum].top() < fnum)
 			{
-				while (*max_fret[lnum].begin() != fnum)
-				{
-					max_fret[lnum].erase(max_fret[lnum].begin());
-					cnt++;
-				}
-			}
-			else if (*max_fret[lnum].begin() < fnum)
-			{
-				max_fret[lnum].insert(fnum);
+				st[lnum].push(fnum);
 				cnt++;
 			}
 			else
 			{
-				while (*max_fret[lnum].begin() > fnum)
+				while (st[lnum].top() > fnum)
 				{
-
-					max_fret[lnum].erase(max_fret[lnum].begin());
+					st[lnum].pop();
 					cnt++;
 
-					if (max_fret[lnum].empty())
+					if (st[lnum].empty())
 						break;
 				}
 
-				max_fret[lnum].insert(fnum);
-				cnt++;
+				if (!st[lnum].empty() && st[lnum].top() == fnum)
+					continue;
+				else
+				{
+					st[lnum].push(fnum);
+					cnt++;
+				}
 			}
 		}
+
 	}
 
 	cout << cnt;
