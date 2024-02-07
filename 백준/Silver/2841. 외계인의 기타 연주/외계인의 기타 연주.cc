@@ -4,7 +4,7 @@
 using namespace std;
 
 int N, F, lnum, fnum;
-set<int, greater<int>> max_fret[500001];
+set<int, greater<int>> max_fret[7];
 int cnt = 0, max = -INT_MAX;
 
 int main()
