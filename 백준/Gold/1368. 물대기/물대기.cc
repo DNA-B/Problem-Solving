@@ -5,8 +5,8 @@ using namespace std;
 
 int N;
 int n_edge = 0, cnt = 0, ans = 0;
-vector<int> p(301, -1);
-tuple<int, int, int> edge[100001];
+vector<int> p(305, -1);
+tuple<int, int, int> edge[100005];
 
 int uf_find(int x)
 {
