@@ -9,8 +9,7 @@ priority_queue<long long,
 	vector<long long>,
 	greater<>> pq;
 
-int main()
-{
+int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
@@ -18,14 +17,12 @@ int main()
 
 	cin >> N >> M;
 
-	for (int x, i = 0; i < N; i++)
-	{
+	for (int x, i = 0; i < N; i++) {
 		cin >> x;
 		pq.push(x);
 	}
 
-	while (M--)
-	{
+	while (M--) {
 		long long x, y, total;
 
 		x = pq.top();
@@ -39,8 +36,7 @@ int main()
 		pq.push(y);
 	}
 
-	while (!pq.empty())
-	{
+	while (!pq.empty()) {
 		ans += pq.top();
 		pq.pop();
 	}
