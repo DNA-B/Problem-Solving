@@ -5,14 +5,7 @@ using namespace std;
 
 int N, M, B;
 int board[501][501];
-int tmp[501][501];
 int ans_time = INT_MAX, ans_height = INT_MIN, max_height = INT_MIN;
-
-void copy_board() {
-	for (int i = 0; i < N; i++)
-		for (int j = 0; j < M; j++)
-			tmp[i][j] = board[i][j];
-}
 
 void solve(int cur_height) {
 	int cur_time = 0;
@@ -21,10 +14,9 @@ void solve(int cur_height) {
 
 	for (int i = 0; i < N; i++) { // cur_gheight보다 큰 땅의 블럭을 인벤토리에 축적
 		for (int j = 0; j < M; j++) {
-			int sub_height = abs(tmp[i][j] - cur_height);
+			int sub_height = abs(board[i][j] - cur_height);
 
-			if (tmp[i][j] > cur_height) {
-				tmp[i][j] -= sub_height;
+			if (board[i][j] > cur_height) {
 				cur_block += sub_height;
 				cur_time += 2 * sub_height;
 			}
@@ -33,13 +25,12 @@ void solve(int cur_height) {
 
 	for (int i = 0; i < N; i++) { // cur_gheight보다 적은 땅의 블럭을 인벤토리에서 꺼내서 쌓기
 		for (int j = 0; j < M; j++) {
-			int sub_height = abs(tmp[i][j] - cur_height);
+			int sub_height = abs(board[i][j] - cur_height);
 
-			if (tmp[i][j] < cur_height) {
+			if (board[i][j] < cur_height) {
 				if (cur_block < sub_height) // 인벤토리에 sub_height만큼의 블럭이 없음
 					return;
 
-				tmp[i][j] += sub_height;
 				cur_block -= sub_height;
 				cur_time += sub_height;
 			}
@@ -73,7 +64,6 @@ int main() {
 	}
 
 	while (max_height >= 0) {
-		copy_board();
 		solve(max_height);
 		max_height--;
 	}
