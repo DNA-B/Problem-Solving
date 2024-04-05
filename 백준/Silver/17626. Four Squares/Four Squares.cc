@@ -4,7 +4,7 @@
 using namespace std;
 
 int N;
-vector<int> mem(500001, INT_MAX);
+vector<int> mem(50001, INT_MAX);
 
 int solve(int cur) {
 	for (int i = 1; i * i <= cur; i++) // min(mem[cur보다 작은 제곱수를 cur에서 뺀 값들])
