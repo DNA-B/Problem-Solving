@@ -1,10 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
-#define GOAL 100
 #include <bits/stdc++.h>
 
 using namespace std;
 
-int N, M;
+int N;
 long long sol[5002];
 long long ans = LLONG_MAX;
 long long ans_sol[3];
