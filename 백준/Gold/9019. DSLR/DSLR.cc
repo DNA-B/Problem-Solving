@@ -14,6 +14,8 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int T, A, B;
+vector<int> vis(BOUND, -1);
+vector<char> order(BOUND); // 경로 찾는 용도
 /***********************/
 
 int order_D(int n) {
@@ -46,6 +48,44 @@ int order_R(int n) {
 	return stoi(tmp);
 }
 
+void solve(int dir, int cur, int& nx, char& nx_path) {
+	switch (dir) {
+		case 0:
+			nx = order_D(cur);
+			nx_path = 'D';
+			break;
+		case 1:
+			nx = order_S(cur);
+			nx_path = 'S';
+			break;
+		case 2:
+			nx = order_L(cur);
+			nx_path = 'L';
+			break;
+		case 3:
+			nx = order_R(cur);
+			nx_path = 'R';
+			break;
+	}
+}
+
+string find_path() {
+	string path;
+	int cur_path = B;
+
+	while (true) {
+		if (cur_path == A)
+			break;
+
+		path += order[cur_path];
+		cur_path = vis[cur_path];
+	}
+
+	reverse(path.begin(), path.end());
+
+	return path;
+}
+
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 
@@ -54,10 +94,11 @@ int main() {
 	cin >> T;
 
 	while (T--) {
-		vector<int> vis(BOUND, -1);
-		vector<char> order(BOUND); // 경로 찾는 용도
 		queue<int> q;
 		bool flag = false;
+
+		fill(vis.begin(), vis.end(), -1);
+		fill(order.begin(), order.end(), '\0');
 
 		cin >> A >> B;
 
@@ -72,24 +113,7 @@ int main() {
 				int nx;
 				char nx_path;
 
-				switch (dir) {
-					case 0:
-						nx = order_D(cur);
-						nx_path = 'D';
-						break;
-					case 1:
-						nx = order_S(cur);
-						nx_path = 'S';
-						break;
-					case 2:
-						nx = order_L(cur);
-						nx_path = 'L';
-						break;
-					case 3:
-						nx = order_R(cur);
-						nx_path = 'R';
-						break;
-				}
+				solve(dir, cur, nx, nx_path);
 
 				if (vis[nx] != -1)
 					continue;
@@ -104,23 +128,11 @@ int main() {
 				}
 			}
 
-			if (flag) // 도착 시 break
+			if (flag) // 만약 for 시작 전에 if(cur==B)일 시 break를 하면 시간초과가 발생한다. 큐에서 대기하는 시간이 있기 때문이다.
 				break;
 		}
 
-		string path;
-		int cur_path = B;
-
-		while (true) {
-			if (cur_path == A)
-				break;
-
-			path += order[cur_path];
-			cur_path = vis[cur_path];
-		}
-
-		reverse(path.begin(), path.end());
-		cout << path << "\n";
+		cout << find_path() << "\n";
 	}
 
 	return 0;
