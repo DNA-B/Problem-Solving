@@ -22,14 +22,14 @@ int dy[] = { 0, 0, -1, 1 };
 void check_special_shape(pair<int, int> xy) {
 	int x = xy.X, y = xy.Y;
 
-	if (x - 1 >= 0 and y - 1 >= 0 and x + 1 < N) // ㅓ
-		ans = max(ans, (board[x - 1][y] + board[x][y - 1] + board[x][y] + board[x + 1][y]));
-	if (x - 1 >= 0 and y + 1 < M and x + 1 < N) // ㅏ
-		ans = max(ans, (board[x - 1][y] + board[x][y + 1] + board[x][y] + board[x + 1][y]));
-	if (y - 1 >= 0 and y + 1 < M and x + 1 < N) // ㅗ
-		ans = max(ans, (board[x][y] + board[x + 1][y] + board[x + 1][y - 1] + board[x + 1][y + 1]));
-	if (y - 1 >= 0 and y + 1 < M and x + 1 < N) // ㅜ
-		ans = max(ans, (board[x][y - 1] + board[x][y] + board[x][y + 1] + board[x + 1][y]));
+	if (x - 1 >= 0 and x + 1 < N and y - 1 >= 0) // ㅓ
+		ans = max(ans, (board[x][y] + board[x - 1][y] + board[x + 1][y] + board[x][y - 1]));
+	if (x - 1 >= 0 and x + 1 < N and y + 1 < M) // ㅏ
+		ans = max(ans, (board[x][y] + board[x - 1][y] + board[x + 1][y] + board[x][y + 1]));
+	if (x - 1 >= 0 and y - 1 >= 0 and y + 1 < M) // ㅗ
+		ans = max(ans, (board[x][y] + board[x - 1][y] + board[x][y - 1] + board[x][y + 1]));
+	if (x + 1 < N and y - 1 >= 0 and y + 1 < M) // ㅜ
+		ans = max(ans, (board[x][y] + board[x + 1][y] + board[x][y - 1] + board[x][y + 1]));
 }
 
 void solve(pair<int, int> xy, int cnt, int cur) {
