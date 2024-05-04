@@ -13,10 +13,9 @@
 using namespace std;
 
 /****** VARIABLEs ******/
-int N, M;
 ll res = 0;
+int N, M;
 int arr[BOUND];
-int mod_sum[BOUND];
 map<int, int> mod_cnt;
 /***********************/
 
@@ -27,18 +26,18 @@ int main() {
 
 	cin >> N >> M;
 
-	for (int i = 1; i <= N; i++) {
-		cin >> arr[i];
-		mod_sum[i] = (mod_sum[i - 1] + arr[i]) % M; // 최대 1e9 + 999 이므로 int overflow 괜찮다.
+	for (int x, i = 1; i <= N; i++) {
+		cin >> x;
+		arr[i] = (arr[i - 1] + x) % M; // 최대 (1e9 + (M - 1)) 이므로 int overflow 괜찮다.
 
-		if (mod_sum[i] == 0) // 1번칸부터 i까지의 합이 0일 때
+		if (arr[i] == 0)
 			res++;
 
-		res += mod_cnt[mod_sum[i]]; // mod_sum[i]랑 mod_sum[x]가 값이 같다면 x ~ i까지의 합은 M으로 나눠진다.
-		mod_cnt[mod_sum[i]]++;
+		res += mod_cnt[arr[i]]; // 내 앞에 나와 값이 같은 곳이 있다면 구간 형성이 가능 (ex : 내 앞이 1 0 0이고 내가 1이면 1 ~ cur)
+		mod_cnt[arr[i]]++;
 	}
 
-	cout << res;
+	cout << res; // 만약 N이 10^6이고 모든 값이 M의 배수라면 mod_cnt[0]이 계속 증가하고 res는 0 ~ (10^6 - 1)의 합이 되므로 overflow 발생
 
 	return 0;
 }
