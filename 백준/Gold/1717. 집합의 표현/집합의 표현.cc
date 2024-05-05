@@ -1,63 +1,71 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <bits/stdc++.h>
+
+/******** MACRO ********/
+#define BOUND 2001
+#define MAX 1'000'000'001
+#define MOD 10000
+#define ll long long
+#define X first
+#define Y second
+/***********************/
 
 using namespace std;
 
-int n, m;
-vector<int> parent(1000001);
+/****** VARIABLEs ******/
+int n, m, a, b;
+int union_find;
+vector<int> p(1000001, -1);
+/***********************/
 
-int getParent(int x)
-{
-    if (parent[x] == x)
-        return x;
+int uf_find(int x) {
+	if (p[x] < 0)
+		return x;
 
-    return parent[x] = getParent(parent[x]);
-}
-void unionParent(int a, int b)
-{
-    a = getParent(a);
-    b = getParent(b);
-
-    if (a > b)
-        parent[a] = b;
-    else
-        parent[b] = a;
+	return p[x] = uf_find(p[x]);
 }
 
-void findParent(int a, int b)
-{
-    a = getParent(a);
-    b = getParent(b);
+void uf_union(int a, int b) {
+	a = uf_find(a);
+	b = uf_find(b);
 
-    if (a == b)
-        cout << "YES\n";
-    else
-        cout << "NO\n";
+	if (a == b) // 부모 같음
+		return;
+
+	if (p[a] == p[b]) // 둘의 rank가 같다면 둘 중 하나의 rank - 1
+		p[a]--;
+
+	if (p[a] < p[b]) // rank가 더 작은 쪽이 큰 쪽에 합쳐진다.
+		p[b] = a;
+	else
+		p[a] = b;
 }
 
-int main()
-{
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+void findParent(int a, int b) {
+	a = uf_find(a);
+	b = uf_find(b);
 
-    int union_find;
-    int a, b;
+	if (a == b)
+		cout << "YES\n";
+	else
+		cout << "NO\n";
+}
 
-    cin >> n >> m;
+int main() {
+	cin.tie(0)->sync_with_stdio(0);
 
-    parent.resize(n + 1);
+	// freopen("input.txt", "r", stdin);
 
-    for (int i = 1; i <= n; i++)
-        parent[i] = i;
- 
-    while (m--)
-    {
-        cin >> union_find >> a >> b;
+	cin >> n >> m;
 
-        if (union_find == 0)
-            unionParent(a, b);
-        else
-            findParent(a, b);
-    }
+	while (m--) {
+		cin >> union_find >> a >> b;
 
-    return 0;
+		if (union_find == 0)
+			uf_union(a, b);
+		else
+			findParent(a, b);
+	}
+
+	return 0;
 }
