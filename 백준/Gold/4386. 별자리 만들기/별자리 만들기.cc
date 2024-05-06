@@ -51,6 +51,8 @@ int main() {
 	// freopen("input.txt", "r", stdin);
 
 	cin >> N;
+	cout << fixed;
+	cout.precision(2);
 
 	for (int i = 0; i < N; i++) {
 		double a, b;
@@ -59,12 +61,9 @@ int main() {
 		star.push_back({ a, b });
 	}
 
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
+	for (int i = 0; i < N - 1; i++) {
+		for (int j = i + 1; j < N; j++) {
 			double x_cost, y_cost, cost;
-
-			if (i == j)
-				continue;
 
 			x_cost = pow(star[i].X - star[j].X, 2);
 			y_cost = pow(star[i].Y - star[j].Y, 2);
@@ -92,8 +91,6 @@ int main() {
 			break;
 	}
 
-	cout << fixed;
-	cout.precision(2);
 	cout << ans;
 
 	return 0;
