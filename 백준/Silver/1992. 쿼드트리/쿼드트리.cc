@@ -21,10 +21,10 @@ void q_tree(int n, int r, int l)
               (n / 2) 크기의 4사분면으로 분할한다. */
 
                 cout << '(';
-                q_tree(n / 2, r, l); // 1사분면
-                q_tree(n / 2, r, l + (n / 2)); // 2사분면
-                q_tree(n / 2, r + (n / 2), l); // 3사분면
-                q_tree(n / 2, r + (n / 2), l + (n / 2)); // 4사분면
+                q_tree(n / 2, r, l); // 1
+                q_tree(n / 2, r, l + (n / 2)); // 2
+                q_tree(n / 2, r + (n / 2), l); // 3
+                q_tree(n / 2, r + (n / 2), l + (n / 2)); // 4
                 cout << ')';
 
                 return;
