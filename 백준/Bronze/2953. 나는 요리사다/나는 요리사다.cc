@@ -15,25 +15,7 @@ int main()
         for (int j = 0; j < 4; j++)
         {
             cin >> score;
-
-            switch (i)
-            {
-            case 0:
-                arr[0] += score;
-                break;
-            case 1:
-                arr[1] += score;
-                break;
-            case 2:
-                arr[2] += score;
-                break;
-            case 3:
-                arr[3] += score;
-                break;
-            case 4:
-                arr[4] += score;
-                break;
-            }
+            arr[i] += score;
         }
     }
     
