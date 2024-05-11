@@ -14,21 +14,13 @@ int main()
 	sum = s1 + s2 + s3;
 
 	if (s1 == 60 && s1 == s2 && s2 == s3) 
-	{
 		printf("Equilateral");
-	}
-	else if (sum == 180 && (s1 == s2 || s2 == s3 || s3 == s1)) 
-	{
+	else if (sum == 180 and (s1 == s2 || s2 == s3 || s3 == s1)) 
 		printf("Isosceles");
-	}
 	else if (sum == 180) 
-	{
 		printf("Scalene");
-	}
 	else
-	{
 		printf("Error");
-	}
 
 	return 0;
 }
