@@ -67,11 +67,11 @@ int main() {
 				case 'U':
 					nxt = ((i - 1) * M) + j;
 					break;
-				case 'L':
-					nxt = (i * M) + (j - 1);
-					break;
 				case 'R':
 					nxt = (i * M) + (j + 1);
+					break;
+				case 'L':
+					nxt = (i * M) + (j - 1);
 					break;
 			}
 
