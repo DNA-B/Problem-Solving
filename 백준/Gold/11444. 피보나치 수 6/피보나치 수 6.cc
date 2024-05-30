@@ -14,7 +14,7 @@ using namespace std;
 /****** VARIABLEs ******/
 typedef vector<vector<ll>> matrix;
 ll N;
-matrix res = { {1, 0}, {1, 0} };
+matrix res = { {1, 0}, {0, 1} };
 matrix mul_mat = { {1, 1}, {1, 0} };
 /***********************/
 
