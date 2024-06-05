@@ -36,15 +36,15 @@ int main() {
 			}
 		}
 
-		if (flag) {
-			cout << res;
+		if (flag)
 			break;
-		}
 
 		dist *= -2;
 		cur = nxt;
 		nxt = x + dist;
 	}
+    
+    cout << res;
 
 	return 0;
 }
