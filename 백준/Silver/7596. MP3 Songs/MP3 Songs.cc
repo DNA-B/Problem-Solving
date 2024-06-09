@@ -13,6 +13,7 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N, scene = 1;
+vector<string> mp3;
 /***********************/
 
 int main() {
@@ -20,21 +21,19 @@ int main() {
 	// freopen("input.txt", "r", stdin);
 
 	while (1) {
-        string song;
-        set<string> mp3;
-        
 		cin >> N;
 		cin.ignore();
 
 		if (N == 0)
 			break;
 
+		mp3.resize(N);
 		cout << scene++ << "\n";
 
-		for (int i = 0; i < N; i++) {
+		for (string& song : mp3)
 			getline(cin, song);
-			mp3.insert(song);
-		}
+
+		sort(mp3.begin(), mp3.end());
 
 		for (string item : mp3)
 			cout << item << "\n";
