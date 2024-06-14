@@ -17,7 +17,6 @@ using namespace std;
 int T, N, M;
 /***********************/
 
-
 /*
                     1
                 1       1
@@ -30,10 +29,6 @@ int T, N, M;
 최댓값 : 1 + (50000 - 25000) 25000
 */
 
-int rascal(int n, int m) {
-	return 1 + (n - m) * m;
-}
-
 int main() {
 	cin.tie(nullptr)->sync_with_stdio(false);
 	// freopen("input.txt", "r", stdin);
@@ -42,13 +37,7 @@ int main() {
 
 	while (T--) {
 		cin >> N >> M;
-
-		if (N < 0 || M < 0 || N < M)
-			cout << 0 << "\n";
-		else if (M == 0 || M == N)
-			cout << 1 << "\n";
-		else
-			cout << rascal(N, M) << "\n";
+		cout << 1 + (N - M) * M << "\n"; // 입력 조건 덕분에 0보다 작거나 m이 n보다 큰 경우 안 봐도 됨.
 	}
 
 	return 0;
