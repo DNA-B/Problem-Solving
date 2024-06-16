@@ -12,8 +12,11 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
+const int INF = 0x3f3f3f3f;
 int TC, N, M, T, S, G, H;
-int dist_gh, min_g, min_h;
+int A, B, D;
+int min_g, min_h;
+bool is_g = true;
 set<int> res;
 vector<pair<int, int>> adj[BOUND];
 /***********************/
@@ -24,7 +27,7 @@ int dijk(int st, int en) {
 		vector<pair<int, int>>,
 		greater<pair<int, int>>> pq;
 
-	fill(d, d + BOUND, INT_MAX);
+	fill(d, d + BOUND, INF);
 	d[st] = 0;
 	pq.push({ d[st], st });
 
@@ -60,25 +63,27 @@ int main() {
 		for (auto& item : adj)
 			item.clear();
 
-		for (int a, b, d, i = 0; i < M; i++) {
-			cin >> a >> b >> d;
-			adj[a].push_back({ d, b });
-			adj[b].push_back({ d, a });
-
-			if ((a == G && b == H) || (a == H && b == G))
-				dist_gh = d;
+		for (int i = 0; i < M; i++) {
+			cin >> A >> B >> D;
+			adj[A].push_back({ D, B });
+			adj[B].push_back({ D, A });
 		}
 
-		min_g = dijk(S, G);
-		min_h = dijk(S, H);
+		min_g = dijk(S, G) + dijk(G, H);
+		min_h = dijk(S, H) + dijk(H, G);
+		is_g = (min_g < min_h ? true : false); // g->h, h->g 중에 무엇이 더 최소경로인지
 
 		for (int x, i = 0; i < T; i++) {
 			cin >> x;
 
-			if (dijk(S, x) == min_g + dist_gh + dijk(H, x)) // (s -> g -> h -> x)를 거치는 것이 최소경로인가?
-				res.insert(x);
-			else if (dijk(S, x) == min_h + dist_gh + dijk(G, x)) // (s -> h -> g -> x)를 거치는 것이 최소경로인가?
-				res.insert(x);
+			if (is_g) {
+				if (dijk(S, x) == min_g + dijk(H, x)) // g, h를 거치는 것이 최소경로인가?
+					res.insert(x);
+			}
+			else {
+				if (dijk(S, x) == min_h + dijk(G, x)) // g, h를 거치는 것이 최소경로인가?
+					res.insert(x);
+			}
 		}
 
 		for (auto item : res)
