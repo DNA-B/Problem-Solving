@@ -14,9 +14,7 @@ using namespace std;
 /****** VARIABLEs ******/
 const int INF = 0x3f3f3f3f;
 int TC, N, M, T, S, G, H;
-int A, B, D;
-int min_g, min_h;
-bool is_g = true;
+int dist_gh, min_g, min_h;
 set<int> res;
 vector<pair<int, int>> adj[BOUND];
 /***********************/
@@ -63,25 +61,27 @@ int main() {
 		for (auto& item : adj)
 			item.clear();
 
-		for (int i = 0; i < M; i++) {
-			cin >> A >> B >> D;
-			adj[A].push_back({ D, B });
-			adj[B].push_back({ D, A });
+		for (int a, b, d, i = 0; i < M; i++) {
+			cin >> a >> b >> d;
+			adj[a].push_back({ d, b });
+			adj[b].push_back({ d, a });
+
+			if ((a == G && b == H) || (a == H && b == G))
+				dist_gh = d;
 		}
 
-		min_g = dijk(S, G) + dijk(G, H);
-		min_h = dijk(S, H) + dijk(H, G);
-		is_g = (min_g < min_h ? true : false); // g->h, h->g 중에 무엇이 더 최소경로인지
+		min_g = dijk(S, G);
+		min_h = dijk(S, H);
 
 		for (int x, i = 0; i < T; i++) {
 			cin >> x;
 
-			if (is_g) {
-				if (dijk(S, x) == min_g + dijk(H, x)) // g, h를 거치는 것이 최소경로인가?
+			if (min_g < min_h) {
+				if (dijk(S, x) == min_g + dist_gh + dijk(H, x)) // (s -> g -> h -> x)를 거치는 것이 최소경로인가?
 					res.insert(x);
 			}
 			else {
-				if (dijk(S, x) == min_h + dijk(G, x)) // g, h를 거치는 것이 최소경로인가?
+				if (dijk(S, x) == min_h + dist_gh + dijk(G, x)) // (s -> h -> g -> x)를 거치는 것이 최소경로인가?
 					res.insert(x);
 			}
 		}
