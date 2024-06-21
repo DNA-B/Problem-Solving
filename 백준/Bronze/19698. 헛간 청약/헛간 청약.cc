@@ -13,7 +13,6 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N, W, H, L;
-int max_cow;
 /***********************/
 
 int main() {
@@ -21,8 +20,7 @@ int main() {
 	// freopen("input.txt", "r", stdin);
 
 	cin >> N >> W >> H >> L;
-	max_cow = (W / L) * (H / L);
-	cout << (N < max_cow ? N : max_cow);
+	cout << min(N, (W / L) * (H / L));
 
 	return 0;
 }
