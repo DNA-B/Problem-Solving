@@ -13,10 +13,9 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-int N, split_idx = 0, cnt = 0;
+int N, rhyme_cnt = 1, loop_cnt = 0;
 bool is_second = false;
 string rhyme;
-vector<string> v;
 vector<string> team[2];
 queue<string> q;
 /***********************/
@@ -28,13 +27,10 @@ int main() {
 
 	getline(cin, rhyme);
 
-	for (int i = 0; i < rhyme.size(); i++) {
-		if (rhyme[i] == ' ') {
-			v.push_back(rhyme.substr(split_idx, i - split_idx));
-			split_idx = i + 1;
-		}
+	for (char ch : rhyme) {
+		if (ch == ' ')
+			rhyme_cnt++;
 	}
-	v.push_back(rhyme.substr(split_idx, rhyme.size() - split_idx));
 
 	cin >> N;
 	cin.ignore();
@@ -48,14 +44,15 @@ int main() {
 	while (!q.empty()) {
 		string cur = q.front();
 		q.pop();
-		cnt++;
+		loop_cnt++;
 
-		if (cnt % v.size() == 0) {
+		if (loop_cnt % rhyme_cnt == 0) {
 			team[is_second].push_back(cur);
-			cnt = 0;
+			loop_cnt = 0;
 			is_second = !is_second;
 			continue;
 		}
+
 		q.push(cur);
 	}
 
