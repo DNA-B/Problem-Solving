@@ -13,7 +13,7 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-int X, res = 0;
+int X;
 /***********************/
 
 int main() {
@@ -21,11 +21,8 @@ int main() {
 	// freopen("input.txt", "r", stdin);
 
 	cin >> X;
-
-	for (int i = 0; i < 7; i++)
-		res += (X >> i) & 1;
-
-	cout << res;
+	bitset<8>bs(X);
+	cout << bs.count();
 
 	return 0;
 }
