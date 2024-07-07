@@ -15,7 +15,7 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int A, B, N, W;
-stack<pair<int, int>> res;
+int res = -1, cnt = 0;
 /***********************/
 
 int main() {
@@ -25,16 +25,16 @@ int main() {
 	cin >> A >> B >> N >> W;
 
 	for (int i = 1; i < N; i++) {
-		int food = (A * i) + (B * (N - i));
-
-		if (food == W)
-			res.push({ i, N - i });
+		if ((A * i) + (B * (N - i)) == W) {
+			res = i;
+			cnt++;
+		}
 	}
 
-	if (res.size() > 1 || res.empty())
-		cout << -1;
+	if (cnt == 1)
+		cout << res << " " << N - res;
 	else
-		cout << res.top().X << " " << res.top().Y;
+		cout << -1;
 
 	return 0;
 }
