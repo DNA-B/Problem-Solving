@@ -14,26 +14,21 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-int total = 0, x;
-bool flag = true;
+int res = 0, total = 0;
 /***********************/
 
 int main() {
 	cin.tie(NULL)->ios_base::sync_with_stdio(false);
 	// freopen("input.txt", "r", stdin);
 
-	for (int i = 0; i < 10; i++) {
+	for (int x, i = 0; i < 10; i++) {
 		cin >> x;
+		total += x;
 
-		if (!flag)
-			continue;
-
-		if (abs(100 - (total + x)) <= abs(100 - total))
-			total += x;
-		else // 한 번 안 먹으면 다음 버섯은 모두 못 먹음
-			flag = false;
+		if (abs(100 - total) <= abs(100 - res))
+			res = total;
 	}
 
-	cout << total;
+	cout << res;
 	return 0;
 }
