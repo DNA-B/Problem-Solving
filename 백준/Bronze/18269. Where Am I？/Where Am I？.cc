@@ -24,22 +24,19 @@ int main() {
 
 	cin >> N >> s;
 
-	for (int k = 1; k <= N; k++) {
+	for (int i = 0; i < N; i++) {
+		set<string> sub_s;
 		bool flag = true;
 
-		for (int i = 0; i <= N - k; i++) {
-			string tmp = s.substr(i, k);
-
-			for (int j = 0; j <= N - k; j++) {
-				if (i == j)
-					continue;
-				if (tmp == s.substr(j, k))
-					flag = false;
+		for (int j = 0; j < N - i; j++) {
+			if (sub_s.insert(s.substr(j, i + 1)).Y == false) { // insert할 때, 이미 있는 값이면 pair second 값이 false.
+				flag = false;
+				break;
 			}
 		}
 
 		if (flag) {
-			cout << k;
+			cout << i + 1;
 			break;
 		}
 	}
