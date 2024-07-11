@@ -30,7 +30,7 @@ bool solve(int x, int y) {
 
 		if (x < 1 || x > N || y < 1 || y > M) // 가두기 실패
 			return false;
-		if (cnt > 50000)
+		if (cnt > 2* N * M)
 			return true;
 
 		cnt++;
@@ -53,7 +53,7 @@ int main() {
 			res.push_back(i);
 	}
 
-	cout << res.size() << "\n";
+	cout << res.size() << (res.empty() ? "" : "\n");
 	for (int row : res)
 		cout << row << " ";
 
