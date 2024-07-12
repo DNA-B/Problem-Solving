@@ -4,7 +4,7 @@
 using namespace std;
 
 /******** MACRO ********/
-#define BOUND 10001
+#define BOUND 1001
 #define INF 0x3f3f3f3f
 #define MOD 1'000'000'007
 #define PI 3.1415926535897932
@@ -15,7 +15,7 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N, K;
-int w[BOUND], v[BOUND], mem[BOUND][BOUND];
+int w[BOUND], v[BOUND], mem[BOUND][10001];
 /***********************/
 
 int main() {
