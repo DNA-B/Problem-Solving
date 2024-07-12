@@ -24,20 +24,20 @@ int main() {
 	cin >> T;
 
 	while (T--) {
-		map<int, int> m;
+		vector<int> v;
 
 		cin >> N;
+		v.resize(N);
 
-		for (int x, i = 0; i < N; i++) {
+		for (int& x : v)
 			cin >> x;
-			m[x]++;
-		}
 
 		cin >> M;
+		sort(v.begin(), v.end());
 
 		for (int x, i = 0; i < M; i++) {
 			cin >> x;
-			cout << (m[x] > 0 ? 1 : 0) << "\n";
+			cout << (binary_search(v.begin(), v.end(), x) ? 1 : 0) << "\n";
 		}
 	}
 
