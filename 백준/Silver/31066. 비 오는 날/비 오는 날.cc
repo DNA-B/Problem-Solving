@@ -34,7 +34,7 @@ int main() {
 			continue;
 		}
 
-		while (c != N) {
+		while (a > 0) {
 			if (d == 0) {
 				c = min(N, c + (b * K));
 				d = b;
