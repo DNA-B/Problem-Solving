@@ -15,30 +15,30 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N;
-int x, y, z;
+vector<int> v;
 /***********************/
+
+int gcd(int a, int b) {
+	return (b == 0 ? a : gcd(b, a % b));
+}
 
 int main() {
 	cin.tie(NULL)->ios_base::sync_with_stdio(false);
 	// freopen("input.txt", "r", stdin);
 
 	cin >> N;
+	v.resize(N);
 
-	if (N == 2) {
-		cin >> x >> y;
+	for (int& num : v)
+		cin >> num;
 
-		for (int i = 1; i <= min(x, y); i++) {
-			if (x % i == 0 && y % i == 0)
-				cout << i << "\n";
-		}
-	}
-	else {
-		cin >> x >> y >> z;
+	int tmp = v[0];
+	for (int i = 1; i < N; i++)
+		tmp = gcd(tmp, v[i]);
 
-		for (int i = 1; i <= min({ x, y, z }); i++) {
-			if (x % i == 0 && y % i == 0 && z % i == 0)
-				cout << i << "\n";
-		}
+	for (int i = 1; i <= tmp; i++) {
+		if (tmp % i == 0)
+			cout << i << "\n";
 	}
 
 	return 0;
