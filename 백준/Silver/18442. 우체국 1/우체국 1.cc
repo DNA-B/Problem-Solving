@@ -26,19 +26,13 @@ void solve(int prev, int cnt) {
 
 		for (int i = 0; i < V; i++) {
 			ll min_dist = LLONG_MAX;
-			for (int j = 0; j < P; j++) {
-				ll tmp_dist = min(abs(town[i] - tmp[j]), L - abs(town[i] - tmp[j]));
-
-				if (min_dist > tmp_dist)
-					min_dist = tmp_dist;
-			}
+			for (int j = 0; j < P; j++)
+				min_dist = min({ min_dist, abs(town[i] - tmp[j]), L - abs(town[i] - tmp[j]) });
 			dist += min_dist;
 		}
 
-		if (res > dist) {
-			res = dist;
-			po = tmp;
-		}
+		if (res > dist)
+			res = dist, po = tmp;
 
 		return;
 	}
