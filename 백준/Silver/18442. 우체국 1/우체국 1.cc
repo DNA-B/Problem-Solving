@@ -17,35 +17,35 @@ using namespace std;
 int V, P;
 ll L, res = LLONG_MAX;
 ll town[BOUND];
-vector<ll> po(BOUND);
+vector<ll> tmp(BOUND), po(BOUND);
 /***********************/
 
-void solve(vector<ll> cur_po, int prev, int cnt) {
+void solve(int prev, int cnt) {
 	if (cnt == P) {
 		ll dist = 0;
 
 		for (int i = 0; i < V; i++) {
 			ll min_dist = LLONG_MAX;
 			for (int j = 0; j < P; j++) {
-				ll tmp = min(abs(town[i] - cur_po[j]), L - abs(town[i] - cur_po[j]));
+				ll tmp_dist = min(abs(town[i] - tmp[j]), L - abs(town[i] - tmp[j]));
 
-				if (min_dist > tmp)
-					min_dist = tmp;
+				if (min_dist > tmp_dist)
+					min_dist = tmp_dist;
 			}
 			dist += min_dist;
 		}
 
 		if (res > dist) {
 			res = dist;
-			po = cur_po;
+			po = tmp;
 		}
 
 		return;
 	}
 
 	for (int i = prev + 1; i < V; i++) {
-		cur_po[cnt] = town[i];
-		solve(cur_po, i, cnt + 1);
+		tmp[cnt] = town[i];
+		solve(i, cnt + 1);
 	}
 }
 
@@ -58,7 +58,7 @@ int main() {
 	for (int i = 0; i < V; i++)
 		cin >> town[i];
 
-	solve(vector<ll>(BOUND), -1, 0);
+	solve(-1, 0);
 
 	cout << res << "\n";
 	for (int i = 0; i < P; i++)
