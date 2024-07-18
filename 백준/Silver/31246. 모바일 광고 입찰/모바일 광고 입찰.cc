@@ -14,7 +14,7 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-int N, K;
+int N, K, A, B;
 vector<int> sub;
 /***********************/
 
@@ -24,9 +24,9 @@ int main() {
 
 	cin >> N >> K;
 
-	for (int a, b, i = 0; i < N; i++) {
-		cin >> a >> b;
-		a >= b ? sub.push_back(0) : sub.push_back(b - a);
+	for (int i = 0; i < N; i++) {
+		cin >> A >> B;
+		sub.push_back(max(B - A, 0));
 	}
 
 	sort(sub.begin(), sub.end());
