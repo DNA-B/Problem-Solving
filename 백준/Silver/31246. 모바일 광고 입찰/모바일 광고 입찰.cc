@@ -14,8 +14,7 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-int N, K, X = 0;
-pair<int, int> p[BOUND];
+int N, K;
 vector<int> sub;
 /***********************/
 
@@ -27,12 +26,11 @@ int main() {
 
 	for (int a, b, i = 0; i < N; i++) {
 		cin >> a >> b;
-		p[i] = { a, b };
-		sub.push_back(a - b);
+		a >= b ? sub.push_back(0) : sub.push_back(b - a);
 	}
 
-	sort(sub.begin(), sub.end(), greater<int>());
-	cout << (sub[K - 1] >= 0 ? 0 : abs(sub[K - 1]));
+	sort(sub.begin(), sub.end());
+	cout << sub[K - 1];
 
 	return 0;
 }
