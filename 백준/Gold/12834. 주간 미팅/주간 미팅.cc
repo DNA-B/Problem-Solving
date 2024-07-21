@@ -48,8 +48,7 @@ int main() {
 
 	fill(d[0], d[0] + 1001, INF);
 	fill(d[1], d[1] + 1001, INF);
-	d[0][KI] = 0;
-	d[1][CR] = 0;
+	d[0][KI] = d[1][CR] = 0;
 
 	for (int i = 0; i < N; i++)
 		cin >> home[i];
