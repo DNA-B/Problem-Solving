@@ -15,23 +15,12 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N;
-int board[31][31];
-ll mem[31][31];
+string board[35][35];
+string mem[35][35];
 /***********************/
 
 ll to_binary(string tmp) {
-	return bitset<60>(tmp).to_ullong();
-}
-
-void solve(string cur, int x, int y) {
-	if (cur.size() > 2 * N - 1)
-		return;
-	if (x > N || y > N)
-		return;
-
-	mem[x][y] = max(mem[x][y], to_binary(cur));
-	solve(cur + to_string(board[x + 1][y]), x + 1, y);
-	solve(cur + to_string(board[x][y + 1]), x, y + 1);
+	return bitset<65>(tmp).to_ullong();
 }
 
 int main() {
@@ -40,13 +29,18 @@ int main() {
 
 	cin >> N;
 
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++)
+	for (int i = 1; i <= N; i++) {
+		for (int j = 1; j <= N; j++)
 			cin >> board[i][j];
 	}
 
-	solve(to_string(board[0][0]), 0, 0);
-	cout << mem[N - 1][N - 1];
+	for (int i = 1; i <= N; i++) {
+		for (int j = 1; j <= N; j++) {
+			ll tmp = max({ to_binary(mem[i - 1][j] + board[i][j]),to_binary(mem[i][j - 1] + board[i][j]) });
+			mem[i][j] = bitset<60>(tmp).to_string();
+		}
+	}
 
+	cout << bitset<60>(mem[N][N]).to_ullong();
 	return 0;
 }
