@@ -21,9 +21,6 @@ vector<int> adj[1001];
 /***********************/
 
 void dfs(int cur) {
-	if (flag)
-		return;
-
 	for (auto nxt : adj[cur]) {
 		if (!vis[nxt]) {
 			vis[nxt] = -vis[cur];
@@ -52,8 +49,8 @@ int main() {
         
 		for (int i = 0; i < M; i++) {
 			cin >> x >> y;
-			adj[x].push_back(y);
-			adj[y].push_back(x);
+			adj[x].emplace_back(y);
+			adj[y].emplace_back(x);
 		}
 
 		for (int i = 1; i <= N; i++) {
