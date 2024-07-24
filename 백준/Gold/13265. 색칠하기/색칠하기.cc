@@ -25,8 +25,8 @@ void dfs(int cur) {
 		return;
 
 	for (auto nxt : adj[cur]) {
-		if (vis[nxt] == -1) {
-			vis[nxt] = (vis[cur] == 1 ? 0 : 1);
+		if (!vis[nxt]) {
+			vis[nxt] = -vis[cur];
 			dfs(nxt);
 		}
 		else if (vis[nxt] == vis[cur]) {
@@ -43,13 +43,13 @@ int main() {
 	cin >> T;
 
 	while (T--) {
-		flag = false;
 		cin >> N >> M;
 
 		for (int i = 1; i <= N; i++)
 			adj[i].clear();
-		fill(vis + 1, vis + (N + 1), -1);
-
+        fill(vis + 1, vis + (N + 1), 0);
+        flag = false;
+        
 		for (int i = 0; i < M; i++) {
 			cin >> x >> y;
 			adj[x].push_back(y);
@@ -57,11 +57,10 @@ int main() {
 		}
 
 		for (int i = 1; i <= N; i++) {
-			if (vis[i] == -1) {
-				vis[i] = 0;
+			if (!vis[i]) {
+				vis[i] = 1;
 				dfs(i);
 			}
-
 			if (flag)
 				break;
 		}
