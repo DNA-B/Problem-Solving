@@ -15,47 +15,41 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int R, C;
-char board[101][101];
+vector<string> board;
 int dx[] = { 1, -1, 0, 0, 1, -1, 1, -1 };
 int dy[] = { 0, 0, 1, -1, 1, -1, -1, 1 };
 /***********************/
 
-void get_mine(int x, int y) {
-	for (int dir = 0; dir < 8; dir++) {
-		int nx = x + dx[dir];
-		int ny = y + dy[dir];
-
-		if (nx < 0 || nx >= R || ny < 0 || ny >= C)
-			continue;
-		if (board[nx][ny] == '*')
-			board[x][y]++;
-	}
-}
-
 int main() {
 	cin.tie(NULL)->ios_base::sync_with_stdio(false);
+	// cout.tie(NULL);
 	// freopen("input.txt", "r", stdin);
 
-	while (1) {
-		cin >> R >> C;
-
+	while (cin >> R >> C) {
 		if (R == 0 && C == 0)
 			break;
 
-		for (int i = 0; i < R; i++) {
-			for (int j = 0; j < C; j++)
-				cin >> board[i][j];
-		}
+		board.resize(R);
+		for (string& row : board)
+			cin >> row;
 
 		for (int i = 0; i < R; i++) {
 			for (int j = 0; j < C; j++) {
-				if (board[i][j] == '.') {
-					board[i][j] = '0';
-					get_mine(i, j);
+				if (board[i][j] == '*')
+					continue;
+
+				board[i][j] = '0';
+				for (int dir = 0; dir < 8; dir++) {
+					int nx = i + dx[dir];
+					int ny = j + dy[dir];
+
+					if (nx < 0 || nx >= R || ny < 0 || ny >= C)
+						continue;
+					if (board[nx][ny] == '*')
+						board[i][j]++;
 				}
-				cout << board[i][j];
 			}
-			cout << "\n";
+			cout << board[i] << "\n";
 		}
 	}
 
