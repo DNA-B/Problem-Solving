@@ -15,10 +15,9 @@ using namespace std;
 
 /****** VARIABLEs ******/
 ll L, A;
-int N, K, cnt = 0;
-queue<ll> q;
-map<ll, int> vis;
-multiset<ll> res;
+int N, K;
+queue<pair<ll, ll>> q; // 위치, 거리
+set<ll> vis;
 /***********************/
 
 int main() {
@@ -29,33 +28,32 @@ int main() {
 
 	for (int i = 0; i < N; i++) {
 		cin >> A;
-		cnt++;
-		vis[A] = 0, res.insert(vis[A]);
-		q.push(A);
+		q.push({ A, 0 });
+		vis.insert(A);
 	}
 
-	while (!q.empty() || cnt < K) {
+	while (!q.empty()) {
 		auto cur = q.front();
 		q.pop();
 
-		for (auto dir : { 1, -1 }) {
-			ll nx = cur + dir;
+		cout << cur.Y << "\n";
+		K--;
 
-			if (cnt == K)
-				break;
+		if (K == 0)
+			break;
+
+		for (auto dir : { 1, -1 }) {
+			ll nx = cur.X + dir;
+
 			if (nx < 0 || nx > L)
 				continue;
 			if (vis.find(nx) != vis.end())
 				continue;
 
-			cnt++;
-			vis[nx] = vis[cur] + 1, res.insert(vis[nx]);
-			q.push(nx);
+			vis.insert(nx);
+			q.push({ nx, cur.Y + 1 });
 		}
 	}
-
-	for (auto idx : res)
-		cout << idx << "\n";
 
 	return 0;
 }
