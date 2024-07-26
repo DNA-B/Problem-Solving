@@ -14,8 +14,8 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-string S;
-bool U, f_C, P, s_C;
+string S, ucpc = "UCPC";
+int cnt = 0;
 /***********************/
 
 int main() {
@@ -25,22 +25,10 @@ int main() {
 	getline(cin, S);
 
 	for (char ch : S) {
-		if (U && f_C && P && s_C)
-			break;
-		else if (U && f_C && P && ch == 'C')
-			s_C = true;
-		else if (U && f_C && ch == 'P')
-			P = true;
-		else if (U && ch == 'C')
-			f_C = true;
-		else if (ch == 'U')
-			U = true;
+		if (ch == ucpc[cnt])
+			cnt++;
 	}
 
-	if (U && f_C && P && s_C)
-		cout << "I love UCPC";
-	else
-		cout << "I hate UCPC";
-
+	cout << (cnt == 4 ? "I love UCPC" : "I hate UCPC");
 	return 0;
 }
