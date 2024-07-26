@@ -17,7 +17,7 @@ using namespace std;
 int N;
 bool flag = true;
 ll jw;
-vector<ll> attack;
+ll attack[100001];
 /***********************/
 
 int main() {
@@ -25,20 +25,21 @@ int main() {
 	// freopen("input.txt", "r", stdin);
 
 	cin >> N >> jw;
-	attack.resize(N - 1);
 
-	for (auto& a : attack)
-		cin >> a;
+	for (int i = 0; i < N - 1; i++)
+		cin >> attack[i];
 
-	sort(attack.begin(), attack.end());
+	sort(attack, attack + (N - 1));
 
-	for (auto a : attack) {
-		if (jw > a)
-			jw += a;
-		else
-			flag = false;
+	for (int i = 0; i < N - 1; i++) {
+		if (jw <= attack[i]) {
+			cout << "No";
+			exit(0);
+		}
+		if (jw > attack[i])
+			jw += attack[i];
 	}
 
-	cout << (flag ? "Yes" : "No");
+	cout << "Yes";
 	return 0;
 }
