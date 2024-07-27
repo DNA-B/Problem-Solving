@@ -1,62 +1,47 @@
-#include <iostream>
-#include <algorithm> 
-#include <string> 
-// #include <numeric>
-// #include <cctype> 
-// #include <cmath>
-#include <stack> 
-// #include <queue>
-// #include <deque>
-// #include <list>
-// #include <set>
-#include <vector>
+#define _CRT_SECURE_NO_WARNINGS
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int main()
-{
-	ios::sync_with_stdio(0);
-	cin.tie(0);
+/******** MACRO ********/
+#define INF 0x3f3f3f3f
+#define LLINF 1e18
+#define MOD 1'000'000'007
+#define PI 3.1415926535897932
+#define ll long long
+#define X first
+#define Y second
+/***********************/
 
-	int len;
-	vector<int> v(1000001);
-	stack<int> obign;
-	stack<int> result;
+/****** VARIABLEs ******/
+int N, x;
+vector<int> v;
+stack<pair<int, int>> st; // { value, idx }
+/***********************/
 
-	cin >> len;
+int main() {
+	cin.tie(NULL)->ios_base::sync_with_stdio(false);
+	// freopen("input.txt", "r", stdin);
 
-	for (int i = 0; i < len; i++)
-	{
-		cin >> v[i];
-	}
+	cin >> N;
+	v.resize(N, -1);
 
-	obign.push(v[len - 1]);
-	result.push(-1);
+	for (int i = 0; i < N; i++) {
+		cin >> x;
 
-	for (int i = len - 2; i >= 0; i--)
-	{
-		while (!(obign.empty()) && (obign.top() <= v[i]))
-		{
-			obign.pop();
+		if (st.empty())
+			st.push({ x, i });
+
+		while (!st.empty() && st.top().X < x) {
+			v[st.top().Y] = x;
+			st.pop();
 		}
 
-		if (obign.empty())
-		{
-			result.push(-1);
-			obign.push(v[i]);
-		}
-		else
-		{
-			result.push(obign.top());
-			obign.push(v[i]);
-		}
+		st.push({ x, i });
 	}
 
-	while (result.size() != 0)
-	{
-		cout << result.top() << " ";
-		result.pop();
-	}
+	for (auto item : v)
+		cout << item << " ";
 
 	return 0;
 }
