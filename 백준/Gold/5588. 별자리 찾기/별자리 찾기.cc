@@ -38,14 +38,14 @@ int main() {
 	}
 
 	for (int i = 0; i < M; i++) {
-		for (int j = 0; j < N; j++) {
-			pair<int, int> p = { star[j].X - wanted_star[i].X, star[j].Y - wanted_star[i].Y };
-			m[p]++;
+		for (int j = 0; j < N; j++)
+			m[{ star[j].X - wanted_star[i].X, star[j].Y - wanted_star[i].Y }]++;
+	}
 
-			if (m[p] == M) {
-				cout << p.X << " " << p.Y;
-				exit(0);
-			}
+	for (auto item : m) {
+		if (item.Y == M) {
+			cout << item.X.first << " " << item.X.second;
+			break;
 		}
 	}
 
