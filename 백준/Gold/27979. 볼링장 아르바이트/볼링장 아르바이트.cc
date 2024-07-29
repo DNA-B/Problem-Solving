@@ -13,10 +13,8 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-int N, x, len = 0;
-int cur, cur_idx;
-vector<int> w;
-vector<pair<int, int>> ball;
+int N, idx;
+vector<int> ball, W;
 /***********************/
 
 int main() {
@@ -25,22 +23,18 @@ int main() {
 
 	cin >> N;
 
-	for (int i = 0; i < N; i++) {
-		cin >> x;
-		ball.push_back({ x, i });
-		w.push_back(x);
-	}
+	ball.resize(N);
+	for (auto& w : ball)
+		cin >> w;
 
-	cur = N - 1, cur_idx = INT_MAX;
-	sort(w.begin(), w.end());
+	W = ball, idx = N - 1;
+	sort(W.begin(), W.end());
 
 	for (int i = N - 1; i >= 0; i--) {
-		if (w[cur] == ball[i].X && cur_idx > ball[i].Y) {
-			cur_idx = ball[i].Y;
-			cur--, len++;
-		}
+		if (ball[i] == W[idx])
+			idx--;
 	}
 
-	cout << N - len;
+	cout << idx + 1;
 	return 0;
 }
