@@ -31,16 +31,10 @@ int main() {
 	for (int i = 1; i <= N; i++) {
 		for (int j = 0; j < i; j++) {
 			if (cho[i][j] != '.') {
-				if (cho[i][j] == 'R' && cho[i + 1][j] == 'R' && cho[i + 1][j + 1] == 'R') {
-					cho[i][j] = '.';
-					cho[i + 1][j] = '.';
-					cho[i + 1][j + 1] = '.';
-				}
-				else if (cho[i][j] == 'B' && cho[i][j + 1] == 'B' && cho[i + 1][j + 1] == 'B') {
-					cho[i][j] = '.';
-					cho[i][j + 1] = '.';
-					cho[i + 1][j + 1] = '.';
-				}
+				if (cho[i][j] == 'R' && cho[i + 1][j] == 'R' && cho[i + 1][j + 1] == 'R')
+					cho[i][j] = cho[i + 1][j] = cho[i + 1][j + 1] = '.';
+				else if (cho[i][j] == 'B' && cho[i][j + 1] == 'B' && cho[i + 1][j + 1] == 'B')
+					cho[i][j] = cho[i][j + 1] = cho[i + 1][j + 1] = '.';
 				else {
 					cout << 0;
 					exit(0);
