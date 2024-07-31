@@ -14,7 +14,6 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N;
-int vis[5001][5001];
 char cho[5001][5001];
 /***********************/
 
@@ -31,19 +30,17 @@ int main() {
 
 	for (int i = 1; i <= N; i++) {
 		for (int j = 0; j < i; j++) {
-			if (vis[i][j])
+			if (cho[i][j] == '.')
 				continue;
-			if (cho[i][j] == 'R' && vis[i][j] == 0 &&
-				cho[i + 1][j] == 'R' && vis[i + 1][j] == 0 &&
-				cho[i + 1][j + 1] == 'R' && vis[i + 1][j + 1] == 0)
-				vis[i][j] = vis[i + 1][j] = vis[i + 1][j + 1] = 1;
-			else if (cho[i][j] == 'B' && vis[i][j] == 0 &&
-				cho[i][j + 1] == 'B' && vis[i][j + 1] == 0 &&
-				cho[i + 1][j + 1] == 'B' && vis[i + 1][j + 1] == 0)
-				vis[i][j] = vis[i][j + 1] = vis[i + 1][j + 1] = 1;
 			else {
-				cout << 0;
-				exit(0);
+				if (cho[i][j] == 'R' && cho[i + 1][j] == 'R' && cho[i + 1][j + 1] == 'R')
+					cho[i][j] = cho[i + 1][j] = cho[i + 1][j + 1] = '.';
+				else if (cho[i][j] == 'B' && cho[i][j + 1] == 'B' && cho[i + 1][j + 1] == 'B')
+					cho[i][j] = cho[i][j + 1] = cho[i + 1][j + 1] = '.';
+				else {
+					cout << 0;
+					exit(0);
+				}
 			}
 		}
 	}
