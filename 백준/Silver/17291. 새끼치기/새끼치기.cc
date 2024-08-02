@@ -23,12 +23,11 @@ int main() {
 
 	cin >> N;
 
-	mem[1] = 1, mem[2] = 2, mem[3] = 4, mem[4] = 7;
-	for (int i = 5; i <= N; i++) {
-		if (i & 1)
-			mem[i] += mem[i - 1] * 2;
-		else
-			mem[i] += (mem[i - 1] * 2) - (mem[i - 4] + mem[i - 5]);
+	mem[1] = 1, mem[4] = -1;
+	for (int i = 2; i <= N; i++) {
+		if (i & 1) mem[i + 3] -= mem[i - 1];
+		else mem[i + 4] -= mem[i - 1];
+		mem[i] += mem[i - 1] * 2;
 	}
 
 	cout << mem[N];
