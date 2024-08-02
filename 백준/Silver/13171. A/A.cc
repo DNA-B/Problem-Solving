@@ -13,31 +13,23 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-ll A, X;
+ll A, X, res = 1;
 /***********************/
-
-ll f_pow(ll cur) {
-	if (cur == 0)
-		return 1;
-	if (cur == 1)
-		return A % MOD;
-
-	ll tmp = f_pow(cur / 2);
-
-	if (cur & 1)
-		return (((tmp % MOD) * (tmp % MOD) % MOD) * (A % MOD)) % MOD;
-	else
-		return ((tmp % MOD) * (tmp % MOD)) % MOD;
-}
-
-
 
 int main() {
 	cin.tie(NULL)->ios_base::sync_with_stdio(false);
 	// freopen("input.txt", "r", stdin);
 
 	cin >> A >> X;
-	cout << f_pow(X);
 
+	while (X) {
+		if (X & 1)
+			res = ((res % MOD) * (A % MOD)) % MOD;
+
+		A = ((A % MOD) * (A % MOD)) % MOD;
+		X >>= 1;
+	}
+
+	cout << res;
 	return 0;
 }
