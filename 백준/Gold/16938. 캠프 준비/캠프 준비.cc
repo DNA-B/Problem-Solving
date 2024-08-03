@@ -1,5 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <numeric>
+#include <stdio.h>
 using namespace std;
 
 /******** MACRO ********/
@@ -40,17 +42,13 @@ void solve(int cnt, int idx) {
 }
 
 int main() {
-	cin.tie(NULL)->ios_base::sync_with_stdio(false);
-	// freopen("input.txt", "r", stdin);
-
-	cin >> N >> L >> R >> X;
+	scanf("%d %d %d %d", &N, &L, &R, &X);
 
 	for (int i = 0; i < N; i++)
-		cin >> diff[i];
+		scanf("%d", &diff[i]);
 
 	sort(diff, diff + N);
 	solve(0, 0);
-
-	cout << res;
+	printf("%d", res);
 	return 0;
 }
