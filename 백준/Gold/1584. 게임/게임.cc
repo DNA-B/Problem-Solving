@@ -26,7 +26,7 @@ priority_queue<tuple<int, int, int>,
 
 void dijk() {
 	while (!pq.empty()) {
-		auto [x, y, cur_d] = pq.top();
+		auto [cur_d, x, y] = pq.top();
 		pq.pop();
 
 		if (d[x][y] != cur_d)
@@ -44,11 +44,10 @@ void dijk() {
 				continue;
 
 			d[nx][ny] = cur_d + board[nx][ny];
-			pq.push({ nx, ny, d[nx][ny] });
+			pq.push({ d[nx][ny], nx, ny });
 		}
 	}
 }
-
 
 int main() {
 	cin.tie(NULL)->ios_base::sync_with_stdio(false);
