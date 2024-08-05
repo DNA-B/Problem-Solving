@@ -25,16 +25,16 @@ priority_queue<pair<int, int>,
 
 void dijk(int ki_or_cr) {
 	while (!pq.empty()) {
-		auto cur = pq.top();
+		auto [cur_cost, cur] = pq.top();
 		pq.pop();
 
-		if (d[ki_or_cr][cur.X] != cur.Y)
+		if (d[ki_or_cr][cur] != cur_cost)
 			continue;
 
-		for (auto nxt : adj[cur.X]) {
-			if (d[ki_or_cr][nxt.X] > d[ki_or_cr][cur.X] + nxt.Y) {
-				d[ki_or_cr][nxt.X] = d[ki_or_cr][cur.X] + nxt.Y;
-				pq.push({ nxt.X, d[ki_or_cr][nxt.X] });
+		for (auto [nxt_cost, nxt] : adj[cur]) {
+			if (d[ki_or_cr][nxt] > d[ki_or_cr][cur] + nxt_cost) {
+				d[ki_or_cr][nxt] = d[ki_or_cr][cur] + nxt_cost;
+				pq.push({ d[ki_or_cr][nxt], nxt });
 			}
 		}
 	}
@@ -56,13 +56,13 @@ int main() {
 	for (int i = 0; i < E; i++) {
 		int a, b, len;
 		cin >> a >> b >> len;
-		adj[a].push_back({ b, len });
-		adj[b].push_back({ a, len });
+		adj[a].push_back({ len, b });
+		adj[b].push_back({ len, a });
 	}
 
-	pq.push({ KI, d[0][KI] });
+	pq.push({ d[0][KI], KI });
 	dijk(0);
-	pq.push({ CR, d[1][CR] });
+	pq.push({ d[1][CR], CR });
 	dijk(1);
 
 	for (int rep = 0; rep < 2; rep++) {
