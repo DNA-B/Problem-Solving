@@ -21,24 +21,28 @@ priority_queue<pair<int, int>,
 	greater<pair<int, int>>> pq;
 /***********************/
 
-void dijk(int st) {
+int dijk(int st) {
 	d[st] = 0;
-	pq.push({ st, 0 });
+	pq.push({ 0, st });
 
 	while (!pq.empty()) {
-		auto cur = pq.top();
+		auto [cur_cost, cur] = pq.top();
 		pq.pop();
 
-		if (d[cur.X] != cur.Y)
+		if (d[cur] != cur_cost)
 			continue;
+		if (cur == N)
+			break;
 
-		for (auto nxt : adj[cur.X]) {
-			if (d[nxt.X] > d[cur.X] + nxt.Y) {
-				d[nxt.X] = d[cur.X] + nxt.Y;
-				pq.push({ nxt.X, d[nxt.X] });
+		for (auto [nxt_cost, nxt] : adj[cur]) {
+			if (d[nxt] > d[cur] + nxt_cost) {
+				d[nxt] = d[cur] + nxt_cost;
+				pq.push({ d[nxt], nxt });
 			}
 		}
 	}
+
+	return d[N];
 }
 
 int main() {
@@ -48,15 +52,13 @@ int main() {
 	cin >> N >> M;
 	fill(d + 1, d + (N + 1), INF);
 
+    int u, v, cost;
 	for (int i = 0; i < M; i++) {
-		int u, v, cost;
 		cin >> u >> v >> cost;
-		adj[u].push_back({ v,  cost });
-		adj[v].push_back({ u,  cost });
+		adj[u].push_back({ cost,  v });
+		adj[v].push_back({ cost,  u });
 	}
 
-	dijk(1);
-	cout << d[N];
-
+	cout << dijk(1);
 	return 0;
 }
