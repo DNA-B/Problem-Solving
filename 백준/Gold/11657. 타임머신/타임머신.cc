@@ -18,27 +18,12 @@ ll d[501];
 vector<pair<int, int>> adj[501];
 /***********************/
 
-bool bellman(int st) {
-	d[st] = 0;
-	for (int i = 1; i <= N; i++) { // 원래 N-1번 갱신인데 N번째에 갱신일어나면 cycle 발생
-		for (int cur = 1; cur <= N; cur++) {
-			for (auto [nxt_cost, nxt] : adj[cur]) {
-				if (d[cur] != LL_INF && d[nxt] > d[cur] + nxt_cost) {
-					if (i == N) return false; // negative cycle
-					d[nxt] = d[cur] + nxt_cost;
-				}
-			}
-		}
-	}
-	return true;
-}
-
 int main() {
 	cin.tie(NULL)->ios_base::sync_with_stdio(false);
 	// freopen("input.txt", "r", stdin);
 
 	cin >> N >> M;
-	fill(d + 1, d + (N + 1), LL_INF);
+	fill(d + 1, d + (N + 1), INT_INF);
 
 	for (int i = 0; i < M; i++) {
 		int a, b, c;
@@ -46,13 +31,25 @@ int main() {
 		adj[a].push_back({ c, b });
 	}
 
-	if (!bellman(1)) {
-		cout << -1;
-		exit(0);
+	d[1] = 0;
+	for (int i = 1; i <= N; i++) { // 원래 N-1번 갱신인데 N번째에 갱신일어나면 cycle 발생
+		for (int cur = 1; cur <= N; cur++) {
+			for (auto [nxt_cost, nxt] : adj[cur]) {
+				if (d[cur] != INT_INF && d[nxt] > d[cur] + nxt_cost) {
+					if (i == N) {
+						cout << -1;
+						exit(0);
+					}
+					d[nxt] = d[cur] + nxt_cost;
+				}
+			}
+		}
 	}
 
-	for (int i = 2; i <= N; i++)
-		cout << (d[i] == LL_INF ? -1 : d[i]) << "\n";
+	for (int i = 2; i <= N; i++) {
+		if (d[i] != INT_INF) cout << d[i] << "\n";
+		else cout << -1 << "\n";
+	}
 
 	return 0;
 }
