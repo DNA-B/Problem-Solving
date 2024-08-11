@@ -52,7 +52,7 @@ int main() {
 
 	while (T--) {
 		p = vector<int>(200005, -1);
-		map<string, int> m;
+		unordered_map<string, int> m;
 		int idx = 1;
 		cin >> N;
 
@@ -66,6 +66,5 @@ int main() {
 			cout << abs(uf_union(m[a], m[b])) << "\n";
 		}
 	}
-    
 	return 0;
 }
