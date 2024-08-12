@@ -14,7 +14,7 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N, M, res = INT_MAX;
-int arr[101][3];
+tuple<int, int, int> t[101];
 /***********************/
 
 int main() {
@@ -23,23 +23,24 @@ int main() {
 
 	cin >> N >> M;
 
-	for (int i = 0; i < N; i++)
-		cin >> arr[i][0] >> arr[i][1] >> arr[i][2];
+	for (int i = 0; i < N; i++) {
+		int a, b, c;
+		cin >> a >> b >> c;
+		t[i] = { a, b, c };
+	}
+
+	sort(t, t + N);
 
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
+			int cnt = 0;
 			for (int k = 0; k < N; k++) {
-				int cnt = 0;
-
-				for (int jinsu = 0; jinsu < N; jinsu++) {
-					if ((arr[i][0] >= arr[jinsu][0]) &&
-						(arr[j][1] >= arr[jinsu][1]) &&
-						(arr[k][2] >= arr[jinsu][2]))
-						cnt++;
+				if (get<1>(t[k]) <= get<1>(t[i]) && get<2>(t[k]) <= get<2>(t[j]))
+					cnt++;
+				if (cnt == M) {
+					res = min(res, get<1>(t[i]) + get<2>(t[j]) + get<0>(t[k]));
+					break;
 				}
-
-				if (cnt >= M)
-					res = min({ res, arr[i][0] + arr[j][1] + arr[k][2] });
 			}
 		}
 	}
