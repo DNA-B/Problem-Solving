@@ -35,10 +35,10 @@ int main() {
 		for (int j = 0; j < N; j++) {
 			int cnt = 0;
 			for (int k = 0; k < N; k++) {
-				if (get<1>(t[k]) <= get<1>(t[i]) && get<2>(t[k]) <= get<2>(t[j]))
-					cnt++;
+				auto [a, b, c] = t[k];
+				if ((b <= get<1>(t[i])) && (c <= get<2>(t[j]))) cnt++;
 				if (cnt == M) {
-					res = min(res, get<1>(t[i]) + get<2>(t[j]) + get<0>(t[k]));
+					res = min(res, get<1>(t[i]) + get<2>(t[j]) + a);
 					break;
 				}
 			}
