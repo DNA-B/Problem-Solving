@@ -25,8 +25,9 @@ int main() {
 
 	cin >> N >> M;
 
-	for (int a, b, i = 0; i < M; i++) {
-		cin >> a >> b;
+	for (int i = 0; i < M; i++) {
+        int a, b;
+        cin >> a >> b;
 		adj[a].push_back(b);
 		deg[b]++;
 	}
