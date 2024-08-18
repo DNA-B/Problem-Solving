@@ -17,25 +17,6 @@ int N, M, mx = INT_MAX;
 int res[2], arr[200005];
 /***********************/
 
-int b_search(int idx) {
-	int lo = idx + 1, hi = N - 1;
-	while (lo + 1 < hi) {
-		int mid = (lo + hi) / 2;
-
-		if (arr[idx] + arr[mid] == 0)
-			return mid;
-		else if (arr[idx] + arr[mid] < 0)
-			lo = mid;
-		else
-			hi = mid;
-	}
-
-	if (abs(arr[idx] + arr[lo]) < abs(arr[idx] + arr[hi]))
-		return lo;
-	else
-		return hi;
-}
-
 int main() {
 	cin.tie(NULL)->ios_base::sync_with_stdio(false);
 	// freopen("input.txt", "r", stdin);
@@ -47,13 +28,19 @@ int main() {
 
 	sort(arr, arr + N);
 
-	for (int i = 0; i < N - 1; i++) {
-		int idx = b_search(i);
-
-		if (mx > abs(arr[i] + arr[idx])) {
-			mx = abs(arr[i] + arr[idx]);
-			tie(res[0], res[1]) = { arr[i], arr[idx] };
+	int lo = 0, hi = N - 1;
+	while (lo < hi) {
+		if (mx > abs(arr[lo] + arr[hi])) {
+			mx = abs(arr[lo] + arr[hi]);
+			tie(res[0], res[1]) = { arr[lo], arr[hi] };
 		}
+
+		if (arr[lo] + arr[hi] == 0)
+			break;
+		else if (arr[lo] + arr[hi] < 0)
+			lo++;
+		else
+			hi--;
 	}
 
 	cout << res[0] << ' ' << res[1];
