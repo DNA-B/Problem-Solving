@@ -13,6 +13,7 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
+string r;
 int N, M, K, res = INT_MAX;
 int B[2005][2005], W[2005][2005];
 /***********************/
@@ -32,11 +33,10 @@ int main() {
 	}
 
 	for (int i = 1; i <= N; i++) {
-		char ch;
+		cin >> r;
 		for (int j = 1; j <= M; j++) {
-			cin >> ch;
-			B[i][j] ^= (ch == 'B');
-			W[i][j] ^= (ch == 'W');
+			B[i][j] ^= (r[j - 1] == 'B');
+			W[i][j] ^= (r[j - 1] == 'W');
 
 			B[i][j] = B[i][j] + B[i - 1][j] + B[i][j - 1] - B[i - 1][j - 1];
 			W[i][j] = W[i][j] + W[i - 1][j] + W[i][j - 1] - W[i - 1][j - 1];
