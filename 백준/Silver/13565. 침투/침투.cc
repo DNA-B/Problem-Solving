@@ -51,7 +51,7 @@ int main() {
 		cin >> board[i];
 
 		if (i == 0) {
-			for (int j = 0; j < M; j++) {
+			for (int j = 0; j < N; j++) {
 				if (board[i][j] == '0') {
 					vis[i][j] = 1;
 					q.push({ i, j });
