@@ -22,10 +22,7 @@ int dy[] = { 0, 0, 1, -1 };
 queue<pair<int, int>> q;
 /***********************/
 
-void bfs(pair<int, int> xy) {
-	vis[xy.X][xy.Y] = 1;
-	q.push(xy);
-
+void bfs() {
 	while (!q.empty()) {
 		auto cur = q.front(); q.pop();
 
@@ -50,13 +47,20 @@ int main() {
 
 	cin >> M >> N;
 
-	for (int i = 0; i < M; i++)
+	for (int i = 0; i < M; i++) {
 		cin >> board[i];
 
-	for (int i = 0; i < N; i++) {
-		if (board[0][i] != '1' && !vis[0][i])
-			bfs({ 0, i });
+		if (i == 0) {
+			for (int j = 0; j < M; j++) {
+				if (board[i][j] == '0') {
+					vis[i][j] = 1;
+					q.push({ i, j });
+				}
+			}
+		}
 	}
+
+	bfs();
 
 	for (int i = 0; i < N; i++) {
 		if (board[M - 1][i] != '1' && vis[M - 1][i]) {
