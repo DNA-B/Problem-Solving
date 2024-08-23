@@ -14,22 +14,22 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
-ll N, K;
+int N, K;
 /***********************/
 
-ll check(ll x) {
-	ll cnt = 0;
+int check(int x) {
+	int cnt = 0;
 	for (int i = 1; i <= N; i++) // i의 배수 중에서 x 이하인 값들 count
 		cnt += min(x / i, N);
 	return cnt;
 }
 
-ll b_search() {
-	ll lo = 0, hi = N * N;
+int b_search() {
+	int lo = 0, hi = K;
 
 	while (lo + 1 < hi) {
-		ll mid = (lo + hi) / 2;
-		ll cnt = check(mid);
+		int mid = (lo + hi) / 2;
+		int cnt = check(mid);
 
 		if (cnt >= K)
 			hi = mid;
