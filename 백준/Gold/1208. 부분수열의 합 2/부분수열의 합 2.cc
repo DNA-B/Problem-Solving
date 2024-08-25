@@ -15,15 +15,16 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
+const int ABS = 4 * 1e6;
+ll cnt = 0;
 int N, S;
 int arr[45];
-ll cnt = 0;
-unordered_map<int, int> um;
+int vis[2 * ABS + 5];
 /***********************/
 
 void l_dfs(int cur, int total) {
 	if (cur == N / 2) {
-		um[total]++;
+		vis[ABS + total]++;
 		return;
 	}
 
@@ -33,7 +34,7 @@ void l_dfs(int cur, int total) {
 
 void r_dfs(int cur, int total) {
 	if (cur == N) {
-		cnt += um[S - total];
+		cnt += vis[ABS + (S - total)];
 		return;
 	}
 
