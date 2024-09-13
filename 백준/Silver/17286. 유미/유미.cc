@@ -16,10 +16,26 @@ using namespace std;
 int res = INT_MAX;
 pair<int, int> yumi;
 pair<int, int> peoples[3];
+bool vis[3];
 /***********************/
 
 double get_dist(pair<int, int> a, pair<int, int> b) {
 	return sqrt(pow(a.X - b.X, 2) + pow(a.Y - b.Y, 2));
+}
+
+void solve(pair<int, int> cur, int cnt, double len) {
+	if (cnt == 3) {
+		res = min(res, (int)len);
+		return;
+	}
+
+	for (int i = 0; i < 3; i++) {
+		if (!vis[i]) {
+			vis[i] = true;
+			solve(peoples[i], cnt + 1, len + get_dist(cur, peoples[i]));
+			vis[i] = false;
+		}
+	}
 }
 
 int main() {
@@ -31,17 +47,8 @@ int main() {
 	for (int i = 0; i < 3; i++)
 		cin >> peoples[i].X >> peoples[i].Y;
 
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			if (j == i) continue;
-			for (int k = 0; k < 3; k++) {
-				if (k == i || k == j) continue;
-				int tmp = get_dist(yumi, peoples[i]) + get_dist(peoples[i], peoples[j]) + get_dist(peoples[j], peoples[k]);
-				res = min(res, tmp);
-			}
-		}
-	}
-
+	solve(yumi, 0, 0);
 	cout << res;
+
 	return 0;
 }
