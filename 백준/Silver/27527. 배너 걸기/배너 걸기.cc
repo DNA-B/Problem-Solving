@@ -15,8 +15,15 @@ using namespace std;
 /****** VARIABLEs ******/
 int N, M, bound;
 int arr[200005];
-unordered_map<int, int> um;
+int cnt[1000005];
 /***********************/
+
+void check(int x) {
+	if (x >= bound) {
+		cout << "YES";
+		exit(0);
+	}
+}
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
@@ -29,22 +36,14 @@ int main() {
 		cin >> arr[i];
 
 	for (int i = 0; i < M; i++) {
-		um[arr[i]]++;
-
-		if (um[arr[i]] >= bound) {
-			cout << "YES";
-			exit(0);
-		}
+		cnt[arr[i]]++;
+		check(cnt[arr[i]]);
 	}
 
 	for (int i = M; i < N; i++) {
-		um[arr[i - M]]--;
-		um[arr[i]]++;
-
-		if (um[arr[i]] >= bound) {
-			cout << "YES";
-			exit(0);
-		}
+		cnt[arr[i - M]]--;
+		cnt[arr[i]]++;
+		check(cnt[arr[i]]);
 	}
 
 	cout << "NO";
