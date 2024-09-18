@@ -13,8 +13,9 @@ using namespace std;
 /***********************/
 
 /****** VARIABLEs ******/
+bool x;
 int N, M;
-int board[305][305], mem[305][305];
+int mem[305][305];
 /***********************/
 
 int main() {
@@ -25,8 +26,8 @@ int main() {
 
 	for (int i = 1; i <= N; i++) {
 		for (int j = 1; j <= M; j++) {
-			cin >> board[i][j];
-			mem[i][j] = max(mem[i - 1][j], mem[i][j - 1]) + board[i][j];
+			cin >> x;
+			mem[i][j] = max(mem[i - 1][j], mem[i][j - 1]) + x;
 		}
 	}
 
