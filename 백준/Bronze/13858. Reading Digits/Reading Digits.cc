@@ -26,13 +26,11 @@ int main() {
 	while (k--) {
 		string tmp = "";
 
-		for (int i = 0; i < cur.size(); i++) {
-			if (i & 1)
-				continue;
-
+		for (int i = 0; i < cur.size(); i += 2) {
 			for (int rep = 0; rep < cur[i] - '0'; rep++)
 				tmp += cur[i + 1];
 		}
+
 		cur = tmp;
 	}
 
