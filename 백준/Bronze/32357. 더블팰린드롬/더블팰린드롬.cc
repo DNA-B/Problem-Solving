@@ -14,16 +14,8 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N, cnt = 0;
-string s[10005];
+string S;
 /***********************/
-
-bool is_pal(string a) {
-	for (int i = 0; i < a.size() / 2; i++) {
-		if (a[i] != a[a.size() - (i + 1)])
-			return false;
-	}
-	return true;
-}
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
@@ -31,11 +23,15 @@ int main() {
 
 	cin >> N;
 
-	for (int i = 0; i < N; i++)
-		cin >> s[i];
+	while (N--) {
+		cin >> S;
 
-	for (int i = 0; i < N; i++)
-		cnt += is_pal(s[i]);
+		string rv_S = S;
+		reverse(rv_S.begin(), rv_S.end());
+
+		if (S == rv_S)
+			cnt++;
+	}
 
 	cout << cnt * (cnt - 1);
 	return 0;
