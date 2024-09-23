@@ -31,10 +31,11 @@ int main() {
 
 	cin >> N;
 
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++)
 		cin >> s[i];
+
+	for (int i = 0; i < N; i++)
 		cnt += is_pal(s[i]);
-	}
 
 	cout << cnt * (cnt - 1);
 	return 0;
