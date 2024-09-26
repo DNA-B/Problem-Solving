@@ -14,7 +14,7 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N, Q;
-bool vis[2000005];
+bool vis[1050005];
 /***********************/
 
 int main() {
