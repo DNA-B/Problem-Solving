@@ -17,10 +17,6 @@ int N, cnt = 0;
 int a, b, c, d;
 /***********************/
 
-bool check(int u, int v) {
-	return max(a * (v - b) * (v - b) + c, d) == u;
-}
-
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
 	// freopen("input.txt", "r", stdin);
@@ -30,7 +26,7 @@ int main() {
 	int u, v;
 	while (N--) {
 		cin >> u >> v;
-		if (check(u, v)) cnt++;
+		if (max(a * (v - b) * (v - b) + c, d) == u) cnt++;
 	}
 
 	cout << cnt;
