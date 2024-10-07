@@ -1,30 +1,29 @@
-#include <iostream>
-#include <cctype>
-#include <cstring>
-#include <cstdlib>
-#include <cmath>
-#include <algorithm>
-#include <string>
-#include <vector>
+#define _CRT_SECURE_NO_WARNINGS
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int main() 
-{
-	int a = 0;
-	int b = 0;
+/******** MACRO ********/
+#define PI 3.1415926535897932
+#define MOD 1000000007
+#define INT_INF 0x3f3f3f3f
+#define LL_INF 1e18
+#define ll long long
+#define X first
+#define Y second
+/***********************/
 
+/****** VARIABLEs ******/
+pair<int, int> n;
+/***********************/
 
-	while (1)
-	{
-		cin >> a >> b;
+int main() {
+	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
+	// freopen("input.txt", "r", stdin);
 
-		if (cin.eof() == true)
-		{
-			return 0;
-		}
-
-		cout << a + b << '\n';
+	while (cin >> n.X >> n.Y) {
+		cout << n.X + n.Y << '\n';
 	}
+
 	return 0;
 }
