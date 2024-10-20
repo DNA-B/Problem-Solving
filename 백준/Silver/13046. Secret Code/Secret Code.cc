@@ -15,10 +15,9 @@ using namespace std;
 
 /****** VARIABLEs ******/
 int N;
+bool chk[205];
 string S, cmp;
-unordered_map<char, int> um;
 /***********************/
-
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
@@ -26,23 +25,18 @@ int main() {
 
 	cin >> S >> N;
 
-	while (N--) {
-		for (char ch : S)
-			um[ch]++;
+	for (char ch : S)
+		chk[ch] = true;
 
+	while (N--) {
 		int cor = 0, diff = 0;
 		cin >> cmp;
-
 		for (int i = 0; i < S.size(); i++) {
-			if (um[cmp[i]] > 0 && cmp[i] == S[i]) {
-				um[cmp[i]]--;
+			if (chk[cmp[i]] && cmp[i] == S[i])
 				cor++;
-			}
-			else if (um[cmp[i]] > 0 && cmp[i] != S[i]) {
+			else if (chk[cmp[i]] && cmp[i] != S[i])
 				diff++;
-			}
 		}
-
 		cout << cor << ' ' << diff << '\n';
 	}
 
