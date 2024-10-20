@@ -18,43 +18,28 @@ int main()
 	cin.tie(0);
 
 	int num;
-
 	cin >> num;
 
-	for (int i = 1; i <= 2 * num - 1; i++)
-	{
-		if (i <= num)
-		{
+	for (int i = 1; i <= 2 * num - 1; i++) {
+		if (i <= num) {
 			for (int k = num - i; k > 0; k--)
-			{
 				cout << " ";
-			}
 		}
-		else
-		{
+		else {
 			for (int k = i - num; k > 0; k--)
-			{
 				cout << " ";
-			}
 		}
 		
-		if (i <= num)
-		{
+		if (i <= num) {
 			for (int j = 2 * i - 1; j > 0; j--)
-			{
 				cout << "*";
-			}
 		}
-		else
-		{
+		else {
 			for (int j = 2 * (i - num) - 1; j < 2 * (num - 1); j++)
-			{
 				cout << "*";
-			}
 		}
-		
-
-		cout << "\n";
+        cout << "\n";
 	}
+    
 	return 0;
 }
