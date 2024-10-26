@@ -11,7 +11,7 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int X, N, mx, l1, l2;
+int X, N;
 int arr[1000005];
 //=========================//
 
@@ -20,7 +20,6 @@ int main() {
 	// freopen("input.txt", "r", stdin);
 
 	while (cin >> X >> N) {
-		mx = -1;
 		X *= 10000000;
 
 		for (int i = 0; i < N; i++)
@@ -28,23 +27,18 @@ int main() {
 
 		sort(arr, arr + N);
 
-		for (int i = 0; i < N - 1; i++) { // 내 뒤의 조각을 찾아야하므로 N - 1까지
-			auto it = lower_bound(arr + (i + 1), arr + N, X - arr[i]); // 내 뒤의 조각을 찾아야하므로 범위는 [i + 1, N)
+		int lo = 0, hi = N - 1;
 
-			if (*it + arr[i] == X) {
-				if (*it - arr[i] > mx) {
-					mx = *it - arr[i];
-					l1 = arr[i];
-					l2 = *it;
-				}
+		while (lo < hi) {
+			if (arr[lo] + arr[hi] == X) {
+				cout << "yes " << arr[lo] << " " << arr[hi] << "\n";
+				break;
 			}
+			(arr[lo] + arr[hi] < X) ? lo++ : hi--;
 		}
-
-		if (mx != -1)
-			cout << "yes " << l1 << " " << l2 << '\n';
-		else
+        
+		if (lo >= hi)
 			cout << "danger\n";
 	}
-
 	return 0;
 }
