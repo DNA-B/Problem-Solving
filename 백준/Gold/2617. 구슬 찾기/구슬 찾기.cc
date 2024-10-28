@@ -12,41 +12,18 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N, M, res = 0;
-int vis[105];
-vector<int> lo[105], hi[105];
+bool adj[105][105];
 //=========================//
 
-int bfs(int st, int mode) {
-	int cnt = 0;
-	queue<int> q;
-
-	fill(vis, vis + (N + 1), 0);
-	q.push(st);
-	vis[st] = 1;
-
-	while (!q.empty()) {
-		int cur = q.front(); q.pop();
-
-		if (mode == 0) {
-			for (int nxt : lo[cur]) {
-				if (!vis[nxt]) {
-					q.push(nxt);
-					vis[nxt] = 1;
-					cnt++;
-				}
-			}
-		}
-		else {
-			for (int nxt : hi[cur]) {
-				if (!vis[nxt]) {
-					q.push(nxt);
-					vis[nxt] = 1;
-					cnt++;
-				}
+void solve() {
+	for (int k = 1; k <= N; k++) {
+		for (int st = 1; st <= N; st++) {
+			for (int en = 1; en <= N; en++) {
+				if (adj[st][k] && adj[k][en])
+					adj[st][en] = true;
 			}
 		}
 	}
-	return cnt;
 }
 
 int main() {
@@ -57,16 +34,19 @@ int main() {
 
 	for (int u, v, i = 0; i < M; i++) {
 		cin >> u >> v;
-		lo[v].push_back(u); // v는 u보다 작다
-		hi[u].push_back(v); // u는 v보다 크다
+		adj[u][v] = true;
 	}
 
-	const int BOUND = (N - 1) / 2;
-	for (int i = 1; i <= N; i++) {
-		int n_lo = bfs(i, 0); // i보다 큰 구슬
-		int n_hi = bfs(i, 1); // i보다 작은 구슬
+	solve();
 
-		if (n_lo > BOUND || n_hi > BOUND)
+	for (int i = 1; i <= N; i++) {
+		int in = 0, out = 0;
+		for (int j = 1; j <= N; j++) {
+			in += adj[i][j];
+			out += adj[j][i];
+		}
+
+		if (in > (N - 1) / 2 || out > (N - 1) / 2)
 			res++;
 	}
 
