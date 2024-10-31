@@ -14,23 +14,6 @@ using namespace std;
 int N, x;
 //=========================//
 
-void solve(int x) {
-	map<int, int> um; // { num, cnt }
-
-	while (x > 1) {
-		for (int i = 2; i <= x; i++) {
-			if (x % i == 0) {
-				um[i]++;
-				x /= i;
-				break;
-			}
-		}
-	}
-
-	for (auto [num, cnt] : um)
-		cout << num << ' ' << cnt << '\n';
-}
-
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
 	// freopen("input.txt", "r", stdin);
@@ -39,7 +22,18 @@ int main() {
 
 	while (N--) {
 		cin >> x;
-		solve(x);
+
+		for (int i = 2; i <= x; i++) {
+			int cnt = 0;
+
+			while (x % i == 0) {
+				cnt++;
+				x /= i;
+			}
+
+			if (cnt != 0)
+				cout << i << ' ' << cnt << '\n';
+		}
 	}
 
 	return 0;
