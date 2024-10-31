@@ -26,12 +26,17 @@ int main() {
 		for (int i = 2; i <= x; i++) {
 			int cnt = 0;
 
+			if (i * i > x) {
+				cout << x << ' ' << 1 << '\n';
+				break;
+			}
+
 			while (x % i == 0) {
 				cnt++;
 				x /= i;
 			}
 
-			if (cnt != 0)
+			if (cnt)
 				cout << i << ' ' << cnt << '\n';
 		}
 	}
