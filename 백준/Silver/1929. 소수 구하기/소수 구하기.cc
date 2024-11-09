@@ -8,37 +8,27 @@ int M, N;
 int mem[1000001];
 bool is_not_prime[1000001];
 
-void era(int n)
-{
-    for (int i = 2; i <= sqrt(n); i++)
-    {
+void era() {
+    is_not_prime[1] = true;
+    
+    for (int i = 2; i <= sqrt(N); i++) {
         if (is_not_prime[i] == true)
             continue;
-
-        for (int j = i * i; j <= n; j += i)
+        for (int j = i * i; j <= N; j += i)
             is_not_prime[j] = true;
     }
-}
-
-void print_prime(int m, int n)
-{
-    for (int i = m; i <= n; i++)
-    {
+    
+    for (int i = M; i <= N; i++) {
         if (is_not_prime[i] == false)
             cout << i << "\n";
     }
 }
 
-int main(void)
-{
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-
+int main(void) {
+    cin.tie(0)->ios::sync_with_stdio(0);
+    
     cin >> M >> N;
-
-    is_not_prime[1] = true;
-    era(N);
-    print_prime(M, N);
+    era();
 
     return 0;
 }
