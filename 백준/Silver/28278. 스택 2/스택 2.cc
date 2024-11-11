@@ -7,22 +7,17 @@ using namespace std;
 int N;
 stack<int> st;
 
-int main()
-{
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+int main() {
+    cin.tie(0)->ios::sync_with_stdio(0);
 
     cin >> N;
 
-    while (N--)
-    {
-        int order;
-        int x;
+    while (N--) {
+        int order, x;
 
         cin >> order;
 
-        switch (order)
-        {
+        switch (order) {
         case 1:
             cin >> x;
             st.push(x);
@@ -30,8 +25,7 @@ int main()
         case 2:
             if (st.empty())
                 cout << -1 << "\n";
-            else
-            {
+            else {
                 cout << st.top() << "\n";
                 st.pop();
             }
@@ -53,6 +47,5 @@ int main()
             break;
         }
     }
-
     return 0;
 }
