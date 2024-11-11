@@ -19,15 +19,9 @@ void solve(int st, int en) {
 	if (st >= en)
 		return;
 
-	int bound = st;
-	while (++bound < en) { // root 노드보다 큰 노드를 발견하면 종료
-		if (tree[st] < tree[bound])
-			break;
-	}
-
-	// postOrder --> [L -> R -> ROOT]
-	solve(st + 1, bound); // 루트보다 작은 서브트리 --> L
-	solve(bound, en); // 루트보다 큰 서브트라 --> R
+	int bound = upper_bound(tree.begin() + (st + 1), tree.begin() + en, tree[st]) - tree.begin(); // 루트보다 큰 값 탐색
+	solve(st + 1, bound); // L
+	solve(bound, en); // R
 	cout << tree[st] << "\n"; // ROOT
 }
 
