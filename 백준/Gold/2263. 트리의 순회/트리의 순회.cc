@@ -19,14 +19,11 @@ void solve(int in_st, int in_en, int post_st, int post_en) {
 	if (in_st > in_en || post_st > post_en)
 		return;
 
-	// inorder [ROOT -> L -> R]
 	int root_idx = idx[post[post_en]]; // inorder에서 루트의 위치를 파악
-	int l_len = root_idx - in_st;
-	int r_len = in_en - root_idx;
-
+	// inorder [ROOT -> L -> R]
 	cout << in[root_idx] << ' '; // ROOT
-	solve(in_st, root_idx - 1, post_st, post_st + l_len - 1); // L
-	solve(root_idx + 1, in_en, post_en - r_len, post_en - 1); // R
+	solve(in_st, root_idx - 1, post_st, post_st - in_st + root_idx - 1); // L
+	solve(root_idx + 1, in_en, post_en - in_en + root_idx, post_en - 1); // R
 }
 
 int main() {
