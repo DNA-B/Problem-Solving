@@ -11,7 +11,7 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int N, M, T;
+int N, M, T, u, v;
 int dist[1005][1005];
 bool is_special[1005];
 pair<int, int> cities[1005];
@@ -43,15 +43,15 @@ int main() {
 		dist[i][i] = 0;
 		for (int j = i + 1; j <= N; j++) {
 			dist[i][j] = dist[j][i] = abs(cities[i].X - cities[j].X) + abs(cities[i].Y - cities[j].Y);
-			if (is_special[i] && is_special[j]) // 둘 다 특별한 도시
-				dist[i][j] = dist[j][i] = min(dist[i][j], T); // dist[i][j]랑 dist[j][i]랑 값이 똑같아서 아무거나 min에 들어가도 됨.
+			if (is_special[i] && is_special[j] && dist[i][j] > T) // 둘 다 특별한 도시고 거리가 T보다 클 때 텔레포트
+				dist[i][j] = dist[j][i] = T;
 		}
 	}
 
 	solve(); // 플로이드
-	
-    cin >> M;
-	for (int u, v, i = 0; i < M; i++) {
+
+	cin >> M;
+	for (int i = 0; i < M; i++) {
 		cin >> u >> v;
 		cout << dist[u][v] << '\n';
 	}
