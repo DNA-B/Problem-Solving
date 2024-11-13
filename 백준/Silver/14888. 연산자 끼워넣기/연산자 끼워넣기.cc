@@ -10,17 +10,13 @@ BOJ 14888 : 연산자 끼워넣기
 - 연산자를 담은 배열에서 next_permutation을 통해 순열을 구하고 최댓값, 최솟값을 계속 갱신하여 준다.
 */
 
-int n;
-int res_min = 2100000000;
-int res_max = -2100000000;
-int num_op;
+int n, num_op;
+int res_min = 2100000000, res_max = -2100000000;
 vector<char> v_op;
 vector<int> v;
 
-int main()
-{
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+int main() {
+    cin.tie(0)->ios::sync_with_stdio(0);
 
     cin >> n;
     v.resize(n);
@@ -28,12 +24,10 @@ int main()
     for (int i = 0; i < n; ++i)
         cin >> v[i];
 
-    for (int i = 0; i < 4; i++)
-    {
+    for (int i = 0; i < 4; i++) {
         cin >> num_op;
 
-        switch (i)
-        {
+        switch (i) {
         case 0:
             while (num_op--)
                 v_op.push_back('+');
@@ -55,14 +49,11 @@ int main()
 
     sort(v_op.begin(), v_op.end());
 
-    do 
-    {
+    do {
         int tmp = v[0];
 
-        for (int i = 1; i < n; i++)
-        {
-            switch (v_op[i - 1])
-            {
+        for (int i = 1; i < n; i++) {
+            switch (v_op[i - 1]) {
             case '+':
                 tmp += v[i];
                 break;
@@ -87,6 +78,5 @@ int main()
     } while (next_permutation(v_op.begin(), v_op.end()));
 
     cout << res_max << "\n" << res_min;
-
     return 0;
 }
