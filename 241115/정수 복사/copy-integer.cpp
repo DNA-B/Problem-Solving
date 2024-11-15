@@ -2,8 +2,9 @@
 using namespace std;
 
 int main() {
+    cin.tie(nullptr)->ios_base::sync_with_stdio(false);
     int a=3, b=4;
-    a = b;
-    cout<<a*b;
+    b = a;
+    cout<<a<<' '<<b<<'\n'<<a*b;
     return 0;
 }
