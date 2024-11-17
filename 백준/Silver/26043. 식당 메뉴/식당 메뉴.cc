@@ -14,16 +14,18 @@ using namespace std;
 int N;
 queue <pair<int, int>> line;
 queue<int> meal;
-set<int> prefer, no_prefer, no_meal;
+vector<int> prefer, no_prefer, no_meal;
 //=========================//
 
-void print(set<int> s) {
-	if (s.empty()) {
+void print(vector<int> v) {
+	if (v.empty()) {
 		cout << "None\n";
 		return;
 	}
 
-	for (int stu : s)
+	sort(v.begin(), v.end());
+
+	for (int stu : v)
 		cout << stu << ' ';
 	cout << '\n';
 }
@@ -53,17 +55,15 @@ int main() {
 		auto [stu, want] = line.front(); line.pop();
 
 		if (want != cur)
-			no_prefer.insert(stu);
+			no_prefer.push_back(stu);
 		else
-			prefer.insert(stu);
+			prefer.push_back(stu);
 	}
 
 	while (!line.empty()) {
 		auto [stu, want] = line.front(); line.pop();
-		no_meal.insert(stu);
+		no_meal.push_back(stu);
 	}
 
-	print(prefer);
-	print(no_prefer);
-	print(no_meal);
+	print(prefer); print(no_prefer); print(no_meal);
 }
