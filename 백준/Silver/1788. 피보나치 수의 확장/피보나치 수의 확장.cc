@@ -24,19 +24,13 @@ int main(void)
 
     fibo(abs(N));
 
-    if (N < 0)
-    {
-        if (N % 2 == 0) // 음수
-            cout << -1 << "\n";
-        else // 양수
-            cout << 1 << "\n";
-
-        cout << mem[abs(N)] % 1000000000;
-    }
+    if (N < 0 && N % 2 == 0)
+        cout << -1 << "\n";
     else if (N == 0)
-        cout << 0 << "\n" << 0;
+        cout << 0 << "\n";
     else
-        cout << 1 << "\n" << (mem[N] % 1000000000);
+        cout << 1 << "\n";
 
+    cout << mem[abs(N)] % 1000000000;
     return 0;
 }
