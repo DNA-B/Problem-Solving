@@ -25,6 +25,7 @@ int main() {
 		int mx = -1;
 
 		cin >> N;
+
 		for (int i = 0; i < N; i++)
 			cin >> arr[i];
 
@@ -32,7 +33,7 @@ int main() {
 
 		for (int i = 2; i < N; i++) // {2, 5, 9} , {4, 7}로 나누는 것이 최소 간격
 			mx = max(mx, arr[i] - arr[i - 2]);
-		mx = max({ mx, arr[1] - arr[0], arr[N - 1] - arr[N - 2] }); // {2, 5, 9, 7, 4}일 때, {2, 4}, {9, 7} 고려
+		mx = max(mx, arr[1] - arr[0]); // {2, 5, 9, 7, 4}일 때, {2, 4} 고려
 
 		cout << mx << "\n";
 	}
