@@ -15,7 +15,7 @@ void dfs(int v) {
     cout << v << " ";
     vis_d[v] = 1;
 
-    for (int i = 1; i < 1001; i++) {
+    for (int i = 1; i <= n; i++) {
         if (vu[v][i] == 1 && vis_d[i] == 0)
             dfs(i);
     }
@@ -32,7 +32,7 @@ void bfs(int s) {
 
         cout << cur << " ";
 
-        for (int i = 1; i < 1001; i++) {
+        for (int i = 1; i <= n; i++) {
             nxt = vu[cur][i];
 
             if (vis_b[i] == 0 && nxt == 1) {
