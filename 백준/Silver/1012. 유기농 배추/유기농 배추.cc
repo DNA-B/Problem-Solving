@@ -1,63 +1,76 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int t_case, n, m;
-int board[51][51], vis[51][51];
-int dx[4] = { -1, 1, 0, 0 }; // 상하좌우
-int dy[4] = { 0, 0, -1 ,1 };
-queue<pair<int, int>> q;
+//=====================================
+# define X first
+# define Y second
+int t, m, n, r;
+int vis[50][50];
+int arr[50][50];
+int dx[4] = { 1, 0, -1, 0 };
+int dy[4] = { 0, 1, 0, -1 };
+//=====================================
+
+int bfs(int x, int y) {
+
+   // 너비 우선 탐색 - deque 사용
+   deque<pair<int, int>> q;
+   vis[x][y] = 1;
+   q.push_back({ x, y });
+
+   while (!q.empty()) {
+      pair<int, int> cur = q.front(); q.pop_front();
+
+      for (int dir = 0; dir < 4; dir++) {
+         int nx = cur.X + dx[dir];
+         int ny = cur.Y + dy[dir];
+
+         if (nx < 0 || nx >= m || ny < 0 || ny >= n) continue;
+         if (vis[nx][ny] || arr[nx][ny] != 1) continue;
+         vis[nx][ny] = 1;
+         q.push_back({ nx, ny });
+      }
+   }
+
+   return 0;
+}
+
 
 int main() {
-    cin.tie(0)->ios::sync_with_stdio(0);
+   cin.tie(0)->ios::sync_with_stdio(0);
 
-    int bug = 0, bechu;
-    int bx, by;
+   cin >> t;
 
-    cin >> t_case;
+   for (int k = 0; k < t; k++) {
+      int row, col, cnt = 0;
 
-    while (t_case--) {
-        cin >> m >> n >> bechu;
+      cin >> m >> n >> r;
 
-        for (int i = 0; i < n; i++) {
-            fill(board[i], board[i] + m, 0);
-            fill(vis[i], vis[i] + m, 0);
-        }
+      // 밭에 배추 심기
+      for (int j = 0; j < r; j++) {
+         cin >> row >> col;
+         arr[row][col] = 1;
+      }
 
-        while (bechu--) {
-            cin >> bx >> by; // 입력받는 x가 가로이고 y가 세로이다.
-            board[by][bx] = 1;
-        }
-
-        for (int i = 0; i < n; i++) { // flood fill 방식
-            for (int j = 0; j < m; j++) {
-                if (board[i][j] != 1 || vis[i][j] == 1) continue;
-
-                q.push({ i,j });
-                bug++;
-
-                while (!q.empty()) {
-                    auto cur = q.front();
-                    q.pop();
-
-                    for (int dir = 0; dir < 4; dir++) {
-                        int nx = cur.first + dx[dir]; // 방향 설정
-                        int ny = cur.second + dy[dir];
-                        
-                        if (nx < 0 || nx >= n || ny >= m || ny < 0) 
-                            continue; // 범위 밖일 경우
-                        if (vis[nx][ny] != 0 || board[nx][ny] != 1) 
-                            continue; // 이미 방문
-                       
-                        vis[nx][ny] = 1;
-                        q.push({ nx,ny });
-                    }
-                }
+      for (int i = 0; i < m; i++) {
+         for (int j = 0; j < n; j++) {
+            if (arr[i][j] == 1 && vis[i][j] == 0) {
+               cnt++;
+               bfs(i, j);
             }
-        }
-        cout << bug << "\n";
-        bug = 0;
-    }
-   
-    return 0;
+         }
+      }
+
+      // 결과 출력
+      cout << cnt << "\n";
+
+      // 다음 케이스를 위한 초기화
+      for (int i = 0; i < m; i++) {
+         fill(arr[i], arr[i] + n, 0);
+         fill(vis[i], vis[i] + n, 0);
+      }
+
+   }
+
+   return 0;
 }
