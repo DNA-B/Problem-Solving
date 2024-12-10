@@ -12,30 +12,8 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N, cnt = 0;
-int color[200005], vis[200005];
-vector<int> adj[200005];
-stack<int> st;
+int color[200005];
 //=========================//
-
-void dfs() {
-	if (color[1]) // 루트가 색이 칠해져 있으면 처음부터 한 번 칠해야 함
-		cnt++;
-
-	vis[1] = 1;
-	st.push(1);
-	while (!st.empty()) {
-		int cur = st.top(); st.pop();
-
-		for (int nxt : adj[cur]) {
-			if (!vis[nxt]) {
-				if (color[nxt] != color[cur])
-					cnt++;
-				vis[nxt] = 1;
-				st.push(nxt);
-			}
-		}
-	}
-}
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
@@ -48,10 +26,8 @@ int main() {
 
 	for (int u, v, i = 0; i < N - 1; i++) {
 		cin >> u >> v;
-		adj[u].push_back(v);
-		adj[v].push_back(u);
+		cnt += (color[u] != color[v]);
 	}
 
-	dfs();
-	cout << cnt;
+	cout << (color[1] ? cnt + 1 : cnt);
 }
