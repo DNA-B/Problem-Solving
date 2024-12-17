@@ -18,15 +18,16 @@ int adj[1005][1005], deg[1005], chk[1005];
 //=========================//
 
 void solve(int cur) {
-	for (; chk[cur] < N; chk[cur]++) {
-		int nxt = chk[cur];
+	while (chk[cur] < N) {
+		int nxt = chk[cur] + 1;
 		while (adj[cur][nxt]) {
 			adj[cur][nxt]--;
 			adj[nxt][cur]--;
 			solve(nxt);
 		}
+        chk[cur]++;
 	}
-	cout << cur + 1 << ' ';
+	cout << cur << ' ';
 }
 
 int main() {
@@ -35,20 +36,19 @@ int main() {
 
 	cin >> N;
 
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
+	for (int i = 1; i <= N; i++) {
+		for (int j = 1; j <= N; j++) {
 			cin >> adj[i][j];
 			deg[i] += adj[i][j];
-			deg[j] += adj[i][j];
 		}
 	}
 
-	for (int i = 0; i < N; i++) {
-		deg[i] /= 2;
+	for (int i = 1; i <= N; i++) {
 		if (deg[i] & 1) {
 			cout << -1;
 			exit(0);
 		}
 	}
-	solve(0);
+    
+	solve(1);
 }
