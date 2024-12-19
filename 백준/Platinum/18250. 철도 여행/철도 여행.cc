@@ -13,15 +13,15 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int N, M, res = 0;
+int N, M, odd, res = 0;
 int vis[200005];
-vector<int> comp, adj[200005];
+vector<int> adj[200005];
 //=========================//
 
 void dfs(int cur) {
 	for (int nxt : adj[cur]) {
 		if (!vis[nxt]) {
-			comp.push_back(nxt);
+			odd += (adj[nxt].size() & 1);
 			vis[nxt] = 1;
 			dfs(nxt);
 		}
@@ -42,14 +42,9 @@ int main() {
 
 	for (int i = 1; i <= N; i++) {
 		if (!vis[i] && adj[i].size() > 0) {
-			comp.clear();
-			comp.push_back(i);
+			odd = (adj[i].size() & 1);
 			vis[i] = 1;
 			dfs(i);
-
-			int odd = 0;
-			for (int node : comp)
-				odd += (adj[node].size() & 1);
 
 			if (odd == 0 || odd == 2) res++;
 			else res += odd / 2;
