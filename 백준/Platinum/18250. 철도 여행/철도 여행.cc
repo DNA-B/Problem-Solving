@@ -50,6 +50,5 @@ int main() {
 			else res += odd / 2;
 		}
 	}
-
 	cout << res;
 }
