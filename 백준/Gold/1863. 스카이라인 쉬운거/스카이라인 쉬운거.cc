@@ -11,7 +11,7 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int N, res = 0;
+int N, x, y, res = 0;
 stack<int> st;
 //=========================//
 
@@ -21,7 +21,6 @@ int main() {
 
 	cin >> N;
 
-	int x, y;
 	while (N--) {
 		cin >> x >> y;
 
@@ -30,14 +29,8 @@ int main() {
 			res++;
 		}
 
-		if (st.empty() || st.top() < y)
-			st.push(y);
+		if (y == 0) continue;
+		if (st.empty() || st.top() < y) st.push(y);
 	}
-
-	while (!st.empty()) {
-		res += (st.top() != 0);
-		st.pop();
-	}
-
-	cout << res;
+	cout << res + st.size();
 }
