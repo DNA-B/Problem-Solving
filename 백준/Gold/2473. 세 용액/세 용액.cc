@@ -8,7 +8,7 @@ long long sol[5002];
 long long ans = LLONG_MAX;
 long long ans_sol[3];
 
-int binary_search(long long n) { // auto casting하려고 long long 사용
+int binary_search(long long n) {
 	int st = 0, en = N - 1, mid;
 
 	while (st <= en) {
@@ -48,9 +48,7 @@ int main() {
 			int k = binary_search(-(sol[i] + sol[j])); // x+y+z = 0에 가까워야 함 -> z = -(x+y)
 			long long cur = abs(sol[i] + sol[j] + sol[k]); // 0에 가까워야 하므로 절댓값으로 비교
 
-			if (k < 0 || k >= N)
-				continue;
-			if (k == i || k == j)
+			if (k < 0 || k >= N || k == i || k == j)
 				continue;
 
 			if (ans > cur) {
