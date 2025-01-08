@@ -29,16 +29,13 @@ int main() {
 	cin >> S;
 
 	string s1, s2, s3;
-	for (int i = 0; i < S.size() - 2; i++) {
-		for (int j = i + 1; j < S.size() - 1; j++) {
-			for (int k = j + 1; k < S.size(); k++) {
-				s1 = S.substr(0, j);
-				s2 = S.substr(j, k - j);
-				s3 = S.substr(k, S.size() - k);
-				dict.insert(proc(s1, s2, s3));
-			}
+	for (int i = 1; i < S.size() - 1; i++) {
+		for (int j = i + 1; j < S.size(); j++) {
+			s1 = S.substr(0, i);
+			s2 = S.substr(i, j - i);
+			s3 = S.substr(j);
+			dict.insert(proc(s1, s2, s3));
 		}
 	}
-
 	cout << *dict.begin();
 }
