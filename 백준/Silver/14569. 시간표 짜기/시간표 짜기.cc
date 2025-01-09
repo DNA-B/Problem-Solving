@@ -12,49 +12,37 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N, M, k, p;
-int stu[10005][55], res[1005];
-vector<int> v[1005];
+ll arr[1005];
 //=========================//
-
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
-	// freopen("input.txt", "r", stdin);
+#ifdef _DEBUG
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif // _DEBUG
 
 	cin >> N;
-	for (int i = 0; i < N; i++) {
+	for (int t, i = 0; i < N; i++) {
 		cin >> k;
 		while (k--) {
-			int t;
 			cin >> t;
-			v[i].push_back(t);
+			arr[i] |= (1LL << t);
 		}
 	}
 
 	cin >> M;
-	for (int i = 0; i < M; i++) {
+	for (int p, q, i = 0; i < M; i++) {
+		ll tmp = 0;
 		cin >> p;
-		for (int q, j = 0; j < p; j++) {
+		while (p--) {
 			cin >> q;
-			stu[i][q] = 1;
+			tmp |= (1LL << q);
 		}
+
+		int res = 0;
+		for (int j = 0; j < N; j++)
+			res += ((tmp & arr[j]) == arr[j]);
+		cout << res << '\n';
 	}
-
-	for (int i = 0; i < M; i++) {
-		for (int j = 0; j < N; j++) {
-			bool flag = true;
-			for (int l = 0; l < v[j].size(); l++) {
-				if (!stu[i][v[j][l]]) {
-					flag = false;
-					break;
-				}
-			}
-
-			if (flag)
-				res[i]++;
-		}
-	}
-
-	for (int i = 0; i < M; i++)
-		cout << res[i] << '\n';
 }
