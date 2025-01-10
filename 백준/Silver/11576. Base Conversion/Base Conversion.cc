@@ -24,12 +24,11 @@ int to_decimal() {
 }
 
 void solve(int dec) {
-	int a = dec, b, c;
-	while (a != 0) {
-		b = a / B;
-		c = a % B;
-		a = b;
-		res.push(c);
+	int r;
+	while (dec != 0) {
+		r = dec % B;
+		dec /= B;
+		res.push(r);
 	}
 }
 
