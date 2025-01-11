@@ -16,24 +16,6 @@ int board[1005][1005];
 pair<int, int> dir[4] = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
 //=========================//
 
-void board_fill(int x, int y, int cur) {
-	board[x][y] = cnt++;
-
-	if (cnt > N * M)
-		return;
-
-	int nx = x + dir[cur].X;
-	int ny = y + dir[cur].Y;
-	if (nx < 1 || nx > N || ny < 1 || ny > M)
-		cur = (cur + 1) % 4;
-	else if (board[nx][ny] != 0)
-		cur = (cur + 1) % 4;
-
-	nx = x + dir[cur].X;
-	ny = y + dir[cur].Y;
-	board_fill(nx, ny, cur);
-}
-
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
 #ifdef _DEBUG
@@ -43,7 +25,21 @@ int main() {
 
 	cin >> M >> N >> K;
 
-	board_fill(1, 1, 0);
+	int x = 1, y = 1, cur = 0;
+	while (cnt <= N * M) {
+		board[x][y] = cnt++;
+
+		int nx = x + dir[cur].X;
+		int ny = y + dir[cur].Y;
+
+		if (nx < 1 || nx > N || ny < 1 || ny > M)
+			cur = (cur + 1) % 4;
+		else if (board[nx][ny] != 0)
+			cur = (cur + 1) % 4;
+
+		x = x + dir[cur].X;
+		y = y + dir[cur].Y;
+	}
 
 	for (int i = 1; i <= N; i++) {
 		for (int j = 1; j <= M; j++) {
