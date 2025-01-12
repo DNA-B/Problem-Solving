@@ -32,7 +32,7 @@ int main() {
 
 	for (int x, i = 0; i < N; i++) {
 		cin >> x;
-		if ((x % gcd_NK) != (i % gcd_NK)) {
+		if ((x - i) % gcd_NK) {
 			cout << "NO";
 			exit(0);
 		}
