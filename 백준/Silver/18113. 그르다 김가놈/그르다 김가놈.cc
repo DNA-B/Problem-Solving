@@ -18,12 +18,8 @@ vector<int> gimbaps;
 
 bool check(int x) {
 	int cnt = 0;
-	for (int gimbap : gimbaps) {
-		if (gimbap < 2 * K)
-			cnt += (gimbap - K) / x;
-		else
-			cnt += (gimbap - (2 * K)) / x;
-	}
+	for (int gimbap : gimbaps)
+		cnt += gimbap / x;
 	return cnt >= M;
 }
 
@@ -38,7 +34,8 @@ int main() {
 
 	for (int i = 0; i < N; i++) {
 		cin >> L;
-		if (L > K) gimbaps.push_back(L);
+		if (L >= 2 * K) gimbaps.push_back(L - (2 * K));
+		else if (L > K) gimbaps.push_back(L - K);
 	}
 
 	int lo = 0, hi = 1e9 + 1;
