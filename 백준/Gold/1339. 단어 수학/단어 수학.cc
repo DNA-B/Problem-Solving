@@ -12,12 +12,9 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int N, res = -1;
-int score[26];
-set<char> dict;
+int N, res = 0;
 unordered_map<char, int> um;
-vector<pair<int, char>> ranking;
-vector<string> words;
+vector<int> ranking;
 //=========================//
 
 int main() {
@@ -32,31 +29,22 @@ int main() {
 	string tmp;
 	for (int i = 0; i < N; i++) {
 		cin >> tmp;
-		words.push_back(tmp);
 
-		for (int j = tmp.size(); j > 0; j--) {
-			int idx = tmp.size() - j;
-			score[tmp[idx] - 'A'] += pow(10, j - 1);
-			dict.insert(tmp[idx]);
+		int pow = 1;
+		for (int j = tmp.size() - 1; j >= 0; j--) {
+			um[tmp[j]] += pow;
+			pow *= 10;
 		}
 	}
 
-	for (char num : dict)
-		ranking.push_back({ score[num - 'A'], num });
+	for (auto [ch, score] : um)
+		ranking.push_back(score);
 
 	sort(ranking.begin(), ranking.end(), greater<>());
 
 	int cnt = 9;
-	for (int i = 0; i < ranking.size(); i++)
-		um[ranking[i].Y] = cnt--;
+	for (int x : ranking)
+		res += x * (cnt--);
 
-	int total = 0;
-	for (string word : words) {
-		for (int i = word.size(); i > 0; i--) {
-			int idx = word.size() - i;
-			total += um[word[idx]] * pow(10, i - 1);
-		}
-	}
-
-	cout << total;
+	cout << res;
 }
