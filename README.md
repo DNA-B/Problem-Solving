@@ -1,3 +1,3 @@
 <div align="center">
-  <h1>BOJ, PROGRAMMERS, LEETCODE</h1>
+  <h1>BOJ, PROGRAMMERS</h1>
 </div> 
