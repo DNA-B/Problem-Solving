@@ -38,9 +38,7 @@ int main() {
 
 	while (T--) {
 		int sub[105][105];
-		int score[105] = { 0 };
-		int sub_cnt[105] = { 0 };
-		int last_sub[105] = { 0 };
+		int score[105] = { 0 }, sub_cnt[105] = { 0 }, last_sub[105] = { 0 };
 		vector<tuple<int, int, int, int>> team; // { score, sub_cnt, last_sub, team_id }
 
 		cin >> N >> K >> Tid >> M; // 팀, 문제, 내 팀 id, 로그 엔트리
@@ -69,9 +67,7 @@ int main() {
 		sort(team.begin(), team.end(), cmp);
 
 		for (int i = 0; i < team.size(); i++) {
-			auto [score, sub_cnt, last_sub, team_id] = team[i];
-
-			if (team_id == Tid) {
+			if (get<3>(team[i]) == Tid) {
 				cout << i + 1 << '\n';
 				break;
 			}
