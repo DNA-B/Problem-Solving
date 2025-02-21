@@ -13,8 +13,7 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N, M;
-vector<int> v;
-multimap<int, string> dict;
+vector<pair<int, string>> v;
 //=========================//
 
 int main() {
@@ -30,16 +29,26 @@ int main() {
 	string style;
 	for (int i = 0; i < N; i++) {
 		cin >> style >> bound;
-		v.push_back(bound);
-		dict.insert({ bound, style });
+		v.push_back({ bound ,style });
 	}
-
-	sort(v.begin(), v.end(), greater<>());
 
 	int power;
 	for (int i = 0; i < M; i++) {
 		cin >> power;
-		auto it = upper_bound(v.begin(), v.end(), power, greater<>());
-		cout << dict.find(*(--it))->Y << '\n';
+
+		int lo = 0, hi = N;
+		while (lo + 1 < hi) {
+			int mid = (lo + hi) / 2;
+
+			if (power <= v[mid].X)
+				hi = mid;
+			else
+				lo = mid;
+		}
+
+		if (power > v[lo].X)
+			cout << v[lo + 1].Y << '\n';
+		else
+			cout << v[lo].Y << '\n';
 	}
 }
