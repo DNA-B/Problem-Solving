@@ -33,15 +33,13 @@ int main() {
 	}
 
 	for (int x, i = 0; i < H; i++) {
-		bool flag = false;
-		int prev = 0;
+		int prev = -1;
 		for (int j = 0; j < W; j++) {
-			if (flag && board[i][j]) {
+			if (prev != -1 && board[i][j]) {
 				res += j - (prev + 1);
 				prev = j;
 			}
 			else if (board[i][j]) {
-				flag = true;
 				prev = j;
 			}
 		}
