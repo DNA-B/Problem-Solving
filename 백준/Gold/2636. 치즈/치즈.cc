@@ -45,32 +45,9 @@ void bfs() {
 
 void solve() {
 	melted.clear();
-
-	for (int i = 0; i < M; i++) { // <그림1>에서 X쳐진 부분은 치즈가 없는 부분
-		if (!board[0][i] && !vis[0][i]) {
-			q.push({ 0, i });
-			vis[0][i] = 1;
-			bfs();
-		}
-		if (!board[N - 1][i] && !vis[N - 1][i]) {
-			q.push({ N - 1, i });
-			vis[N - 1][i] = 1;
-			bfs();
-		}
-	}
-
-	for (int i = 0; i < N; i++) { // <그림1>에서 X쳐진 부분은 치즈가 없는 부분
-		if (!board[i][0] && !vis[i][0]) {
-			q.push({ i, 0 });
-			vis[i][0] = 1;
-			bfs();
-		}
-		if (!board[i][M - 1] && !vis[i][M - 1]) {
-			q.push({ i, M - 1 });
-			vis[i][M - 1] = 1;
-			bfs();
-		}
-	}
+	q.push({ 0, 0 });
+	vis[0][0] = 1;
+	bfs();
 
 	for (auto [x, y] : melted)
 		board[x][y] = 0;
