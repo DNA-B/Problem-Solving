@@ -66,8 +66,8 @@ void solve() {
 			bfs();
 		}
 		if (!board[i][M - 1] && !vis[i][M - 1]) {
-			q.push({ i, N - 1 });
-			vis[i][N - 1] = 1;
+			q.push({ i, M - 1 });
+			vis[i][M - 1] = 1;
 			bfs();
 		}
 	}
