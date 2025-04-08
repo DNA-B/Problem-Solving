@@ -17,7 +17,6 @@ int board[105][105], vis[105][105];
 int dx[] = { 1, -1, 0, 0 };
 int dy[] = { 0, 0, 1, -1 };
 queue<pair<int, int>> q;
-set<pair<int, int>> melted;
 //=========================//
 
 void bfs() {
@@ -33,8 +32,7 @@ void bfs() {
 			if (vis[nx][ny])
 				continue;
 			if (board[nx][ny]) {
-				if (board[nx][ny] < 3) board[nx][ny]++;
-				else melted.insert({ nx, ny }); // 2개 접한 상태
+				board[nx][ny]++;
 				continue;
 			}
 
@@ -45,8 +43,6 @@ void bfs() {
 }
 
 void solve() {
-	melted.clear();
-
 	for (int i = 0; i < M; i++) { // <그림1>에서 X쳐진 부분은 치즈가 없는 부분
 		if (!board[0][i] && !vis[0][i]) {
 			q.push({ 0, i });
@@ -72,7 +68,9 @@ void solve() {
 			bfs();
 		}
 	}
+}
 
+void melting_proc() {
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
 			if (board[i][j] > 0) {
@@ -110,6 +108,7 @@ int main() {
 		rep++;
 		memset(vis, 0, sizeof(vis));
 		solve();
+		melting_proc();
 	}
 
 	cout << rep;
