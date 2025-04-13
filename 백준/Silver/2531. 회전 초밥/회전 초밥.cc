@@ -12,9 +12,17 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int N, d, k, c, mx = -1;
-int arr[60005], vis[3005];
+int N, d, k, c, cnt = 0, res = 0;
+int arr[35000], vis[3005];
+queue<int> q;
 //=========================//
+
+void check() {
+	if (vis[c]) // 쿠폰 초밥이 이미 존재하면
+		res = max(res, cnt); // 추가 X
+	else
+		res = max(res, cnt + 1); // 추가 O
+}
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
@@ -23,30 +31,27 @@ int main() {
 	freopen("output.txt", "w", stdout);
 #endif // _DEBUG
 
-	cin >> N >> d >> k >> c;
+	cin >> N >> d >> k >> c; // 접시, 초밥, 연속, 쿠폰
 
 	for (int i = 0; i < N; i++)
 		cin >> arr[i];
-
 	for (int i = N; i < N + k; i++)
-		arr[i] = arr[i - N];
+		arr[i] = arr[i - N]; // 원형
 
-	int cnt = 0;
 	for (int i = 0; i < k; i++) {
-		if (!vis[arr[i]]) cnt++;
 		vis[arr[i]]++;
+		if (vis[arr[i]] == 1) cnt++;
 	}
+
+	check();
 
 	for (int i = k; i < N + k; i++) {
-		if (vis[arr[i - k]]) {
-			vis[arr[i - k]]--;
-			if (!vis[arr[i - k]] && cnt > 0) cnt--;
-		}
-
-		if (!vis[arr[i]]) cnt++;
+		vis[arr[i - k]]--;
+		if (vis[arr[i - k]] == 0) cnt--;
 		vis[arr[i]]++;
-		mx = max(mx, vis[c] ? cnt : cnt + 1);
+		if (vis[arr[i]] == 1) cnt++;
+		check();
 	}
 
-	cout << mx;
+	cout << res;
 }
