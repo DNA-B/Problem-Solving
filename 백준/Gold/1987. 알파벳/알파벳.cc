@@ -16,7 +16,7 @@ int R, C, mx = -1;
 int dx[] = { 1, -1, 0, 0 };
 int dy[] = { 0, 0 , 1, -1 };
 char board[25][25];
-map<char, bool> dict;
+int vis[26];
 //=========================//
 
 void solve(int len, int x, int y) {
@@ -28,12 +28,12 @@ void solve(int len, int x, int y) {
 
 		if (nx < 0 || nx >= R || ny < 0 || ny >= C)
 			continue;
-		if (dict[board[nx][ny]])
+		if (vis[board[nx][ny] - 'A'])
 			continue;
 
-		dict[board[nx][ny]] = true;
+		vis[board[nx][ny] - 'A'] = 1;
 		solve(len + 1, nx, ny);
-		dict[board[nx][ny]] = false;
+		vis[board[nx][ny] - 'A'] = 0;
 	}
 }
 
@@ -51,7 +51,7 @@ int main() {
 			cin >> board[i][j];
 	}
 
-	dict[board[0][0]] = true;
+	vis[board[0][0] - 'A'] = 1;
 	solve(1, 0, 0);
 	cout << mx;
 }
