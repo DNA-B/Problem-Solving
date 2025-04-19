@@ -60,13 +60,10 @@ int main() {
 		return 0;
 	}
 
-	string tmp, word;
+	string word;
 	for (int i = 0; i < N; i++) {
-		cin >> tmp;
-		word = "";
-		for (int j = 4; j < tmp.size() - 4; j++)
-			word += tmp[j];
-		words.push_back(word);
+		cin >> word;
+		words.push_back(word.substr(4, word.size() - 8));
 	}
 
 	vis[0] = vis[2] = vis[8] = vis[13] = vis[19] = 1; // a, c, i, n, t
