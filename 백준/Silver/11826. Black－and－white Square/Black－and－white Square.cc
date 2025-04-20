@@ -17,6 +17,32 @@ int board[55][55], vis[55][55];
 vector<int> v;
 //=========================//
 
+void check(bool mode) {
+	int outer = mode ? M : N;
+	int inner = mode ? N : M;
+
+	for (int i = 0; i < outer; ++i) {
+		bool flag = true;
+		for (int j = 0; j < inner; ++j) {
+			int row = mode ? j : i;
+			int col = mode ? i : j;
+			if (!board[row][col]) {
+				flag = false;
+				break;
+			}
+		}
+
+		if (flag) {
+			for (int j = 0; j < inner; ++j) {
+				int row = mode ? j : i;
+				int col = mode ? i : j;
+				vis[row][col]++;
+			}
+			v.push_back(mode ? (i + 1) : -(i + 1));
+		}
+	}
+}
+
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
 #ifdef _DEBUG
@@ -46,35 +72,8 @@ int main() {
 		exit(0);
 	}
 
-	for (int col = 0; col < M; col++) { // 세로
-		bool flag = true;
-		for (int row = 0; row < N; row++) {
-			if (!board[row][col]) {
-				flag = false;
-				break;
-			}
-		}
-
-		if (flag) {
-			for (int row = 0; row < N; row++) vis[row][col] = 1;
-			v.push_back(col + 1);
-		}
-	}
-
-	for (int row = 0; row < N; row++) { // 가로
-		bool flag = true;
-		for (int col = 0; col < M; col++) {
-			if (!board[row][col]) {
-				flag = false;
-				break;
-			}
-		}
-
-		if (flag) {
-			for (int col = 0; col < M; col++) vis[row][col]++;
-			v.push_back(-(row + 1));
-		}
-	}
+	check(1);
+	check(0);
 
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
