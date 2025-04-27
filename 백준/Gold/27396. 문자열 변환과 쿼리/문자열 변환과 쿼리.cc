@@ -1,11 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <bits/stdc++.h>
-#include <unordered_set>
 using namespace std;
 
 //========= MACRO =========//
 #define PI 3.1415926535897932
-#define INF 0x3f3f3f3f
+#define INF 0x3f3f3f
 #define LL_INF 1e18
 #define ll long long
 #define X first
@@ -15,7 +14,7 @@ using namespace std;
 //======= VARIABLEs =======//
 int N;
 string S;
-unordered_set<int> idx[65];
+char mapping[65];
 //=========================//
 
 int main() {
@@ -27,8 +26,8 @@ int main() {
 
 	cin >> S >> N;
 
-	for (int i = 0; i < S.length(); i++)
-		idx[S[i] - 'A'].insert(i);
+	for (int i = 0; i < 65; i++)
+		mapping[i] = 'A' + i;
 
 	int order;
 	while (N--) {
@@ -41,15 +40,16 @@ int main() {
 			if (from == to)
 				continue;
 
-			for (int id : idx[from - 'A']) {
-				idx[to - 'A'].insert(id);
-				S[id] = to;
+			for (int i = 0; i < 65; i++) {
+				if (mapping[i] == from) {
+					mapping[i] = to;
+				}
 			}
-
-			idx[from - 'A'].clear();
 			continue;
 		}
 
-		cout << S << '\n';
+		for (char c : S)
+			cout << mapping[c - 'A'];
+		cout << '\n';
 	}
 }
