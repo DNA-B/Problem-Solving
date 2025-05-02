@@ -19,9 +19,9 @@ int arr[205];
 
 void rf_shuffle() {
 	int tmp[205];
-	for (int i = 0; i < 2 * N; i++) {
-		if (i % 2 == 0) tmp[i] = arr[i / 2];
-		else tmp[i] = arr[N + (i / 2)];
+	for (int i = 0; i < N; i++) {
+		tmp[2 * i] = arr[i];
+		tmp[2 * i + 1] = arr[N + i];
 	}
 
 	for (int i = 0; i < 2 * N; i++)
