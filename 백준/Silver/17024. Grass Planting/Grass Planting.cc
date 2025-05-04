@@ -13,8 +13,8 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int N, mx = -1;
-vector<int> adj[100005];
+int N;
+int edge[100005];
 //=========================//
 
 int main() {
@@ -28,12 +28,8 @@ int main() {
 
 	for (int st, en, i = 0; i < N - 1; i++) {
 		cin >> st >> en;
-		adj[st].push_back(en);
-		adj[en].push_back(st);
+		edge[st]++, edge[en]++;
 	}
 
-	for (int i = 1; i <= N; i++)
-		mx = max(mx, (int)adj[i].size());
-
-	cout << mx + 1;
+	cout << *max_element(edge + 1, edge + (N + 1)) + 1;
 }
