@@ -14,7 +14,7 @@ using namespace std;
 
 //======= VARIABLEs =======//
 string S;
-int cnt = 0, res = 0;
+int res = 0;
 int alp[26];
 vector<int> freq;
 //=========================//
@@ -31,16 +31,12 @@ int main() {
 	for (char ch : S)
 		alp[ch - 'a']++;
 
-	for (int i = 0; i < 26; i++) {
-		if (alp[i]) {
-			freq.push_back(alp[i]);
-			cnt++;
-		}
-	}
+	for (int i = 0; i < 26; i++)
+		if (alp[i]) freq.push_back(alp[i]);
 
 	sort(freq.begin(), freq.end());
 
-	for (int i = 0; i < cnt - 2; i++)
+	for (int i = 0; i < (int)freq.size() - 2; i++)
 		res += freq[i];
 
 	cout << res;
