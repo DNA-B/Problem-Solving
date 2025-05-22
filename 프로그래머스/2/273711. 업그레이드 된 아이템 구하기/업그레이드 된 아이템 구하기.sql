@@ -1,15 +1,12 @@
 SELECT 
-    ITEM_ID, 
-    ITEM_NAME, 
-    RARITY
+    C.ITEM_ID, C.ITEM_NAME, C.RARITY
 FROM 
-    ITEM_INFO
+    ITEM_INFO AS P
+INNER JOIN 
+    ITEM_TREE AS TREE ON P.ITEM_ID = TREE.PARENT_ITEM_ID
+INNER JOIN 
+    ITEM_INFO AS C ON C.ITEM_ID = TREE.ITEM_ID
 WHERE 
-    ITEM_ID IN (SELECT 
-                    T.ITEM_ID
-                FROM 
-                    ITEM_INFO AS I, ITEM_TREE AS T
-                WHERE 
-                    I.ITEM_ID = T.PARENT_ITEM_ID AND I.RARITY = 'RARE')
+    P.RARITY = 'RARE'
 ORDER BY 
-    ITEM_ID DESC;
+    C.ITEM_ID DESC;
