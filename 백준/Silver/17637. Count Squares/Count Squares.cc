@@ -13,9 +13,9 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int H, V, cnt = 0;
-int x[1005], y[1005];
-unordered_map<ll, ll> diff_x, diff_y;
+int H, V;
+ll x[1505], y[1505];
+unordered_map<int, int> diff;
 //=========================//
 
 int main() {
@@ -27,23 +27,17 @@ int main() {
 
 	cin >> H >> V;
 
-	for (int i = 0; i < H; ++i) cin >> y[i];
-	for (int i = 0; i < V; ++i) cin >> x[i];
+	for (int i = 0; i < H; i++) cin >> y[i];
+	for (int i = 0; i < V; i++) cin >> x[i];
 
-	for (int i = 0; i < H; ++i) {
-		for (int j = i + 1; j < H; ++j)
-			diff_y[y[j] - y[i]]++;
-	}
+	for (int i = 0; i < H; i++)
+		for (int j = 0; j < i; j++)
+			diff[y[i] - y[j]]++;
 
-	for (int i = 0; i < V; ++i) {
-		for (int j = i + 1; j < V; ++j)
-			diff_x[x[j] - x[i]]++;
-	}
+	long long res = 0;
+	for (int i = 0; i < V; i++)
+		for (int j = 0; j < i; j++)
+			res += diff[x[i] - x[j]];
 
-	for (auto& [diff, count_y] : diff_y) {
-		if (diff_x.count(diff))
-			cnt += count_y * diff_x[diff];
-	}
-
-	cout << cnt << '\n';
+	cout << res;
 }
