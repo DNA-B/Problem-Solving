@@ -37,23 +37,18 @@ int main() {
 	sort(arr, arr + N);
 
 	for (int i = 0; i < N; i++) {
-		double e = 0.0;
 		auto [x, idx] = arr[i];
 		for (int j = 0; j < x; j++) {
 			nums[idx].push_back(total);
-			e += (total--) / (double)x;
+			E += (total--) / (double)x;
 		}
-		sort(nums[idx].begin(), nums[idx].end());
-		E += e;
 	}
 
 	cout << fixed << setprecision(5) << E << '\n';
 
 	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < nums[i].size(); j++) {
-			cout << nums[i][j];
-			if (j != nums[i].size() - 1) cout << ' ';
-			else if (i != N - 1 && j == nums[i].size() - 1) cout << "\n";
-		}
+		for (int j = 0; j < nums[i].size(); j++)
+			cout << nums[i][j] << ' ';
+		cout << '\n';
 	}
 }
