@@ -38,21 +38,15 @@ int main() {
 	dy /= m;
 
 	int mn_dist = get_dist(Xs, Ys, Xe, Ye);
-	int x = Xe, y = Ye;
-
 	while (true) {
-		Xe += dx;
-		Ye += dy;
+		int cur_dist = get_dist(Xs, Ys, Xe + dx, Ye + dy);
 
-		int currentDistance = get_dist(Xs, Ys, Xe, Ye);
-
-		if (mn_dist <= currentDistance)
+		if (mn_dist <= cur_dist)
 			break;
 
-		mn_dist = currentDistance;
-		x = Xe;
-		y = Ye;
+		mn_dist = cur_dist;
+        Xe += dx, Ye += dy;
 	}
 
-	cout << x << ' ' << y << '\n';
+	cout << Xe << ' ' << Ye;
 }
