@@ -26,19 +26,22 @@ vector<string> blind_type[5] = {
 //=========================//
 
 void check(int x, int y) {
-	vector<string> blind;
+	string tmp = "";
 
 	x *= 5, y *= 5;
-	for (int i = x + 1; i < x + 5; i++) {
-		string tmp = "";
-		for (int j = y + 1; j < y + 5; j++)
-			tmp += board[i][j];
-		blind.push_back(tmp);
-	}
+	for (int i = x + 1; i < x + 5; i++)
+		tmp += board[i][y + 1];
 
-	int idx = find(blind_type, blind_type + 5, blind) - blind_type;
-	if (idx < 5)
-		cnt[idx]++;
+	if (tmp == "....")
+		cnt[0]++;
+	else if (tmp == "*...")
+		cnt[1]++;
+	else if (tmp == "**..")
+		cnt[2]++;
+	else if (tmp == "***.")
+		cnt[3]++;
+	else if (tmp == "****")
+		cnt[4]++;
 }
 
 int main() {
