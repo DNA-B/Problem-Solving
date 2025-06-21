@@ -25,13 +25,13 @@ int main() {
 
 	cin >> N;
 
-	ll lo = 1, hi = 2e9;
-	while (lo < hi) {
+	ll lo = 0, hi = 2e9;
+	while (lo + 1 < hi) {
 		ll mid = lo + (hi - lo) / 2;
 		ll room = 3 * mid * (mid - 1) + 1;
 
 		if (room < N)
-			lo = mid + 1;
+			lo = mid;
 		else
 			hi = mid;
 	}
