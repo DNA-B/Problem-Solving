@@ -14,6 +14,7 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N;
+ll total = 0, tmp = 0;
 //=========================//
 
 int main() {
@@ -25,16 +26,14 @@ int main() {
 
 	cin >> N;
 
-	vector<int> v(N);
+	for (int i = 1; i < N; i++)
+		total += i;
 
 	int x;
 	while (N--) {
 		cin >> x;
-		v[x]++;
-
-		if (v[x] == 2) {
-			cout << x;
-			exit(0);
-		}
+		tmp += x;
 	}
+
+	cout << tmp - total;
 }
