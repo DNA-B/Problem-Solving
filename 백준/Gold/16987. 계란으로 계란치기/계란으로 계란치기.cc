@@ -25,8 +25,8 @@ void solve(int cur, int cnt) {
 		return;
 	}
 
-	// 손에 든 계란이 깨졌으면 현재 계란을 치지 않고 넘어간다.
-	if (is_broken[cur]) {
+	// 손에 든 계란이 깨졌거나 깨지지 않은 다른 계란이 없으면 현재 계란을 치지 않고 넘어간다.
+	if (is_broken[cur] || cnt >= N - 1) {
 		solve(cur + 1, cnt);
 		return;
 	}
@@ -48,12 +48,6 @@ void solve(int cur, int cnt) {
 			arr[i].X = s2;
 			is_broken[i] = false;
 		}
-	}
-
-	// 깨지지 않은 다른 계란이 없으면 현재 계란을 치지 않고 넘어간다.
-	if (cnt >= N - 1) {
-		solve(cur + 1, cnt);
-		return;
 	}
 }
 
