@@ -13,7 +13,7 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int res, idx = 0;
+int idx = 0;
 string S;
 //=========================//
 
@@ -39,21 +39,18 @@ int main() {
 			total += S[i] - '0';
 	}
 
-	res = 0;
-	while (true) {
+	for (int i = 0; i < 10; i++) {
 		if (idx & 1) {
-			if ((total + (3 * res)) % 10 == 0) {
-				cout << res;
-				exit(0);
+			if ((total + i * 3) % 10 == 0) {
+				cout << i;
+				break;
 			}
 		}
 		else {
-			if ((total + res) % 10 == 0) {
-				cout << res;
-				exit(0);
+			if ((total + i) % 10 == 0) {
+				cout << i;
+				break;
 			}
 		}
-
-		res++;
 	}
 }
