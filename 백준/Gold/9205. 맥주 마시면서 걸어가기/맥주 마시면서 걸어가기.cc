@@ -67,8 +67,6 @@ int main() {
 		}
 
 		cout << (bfs(0) ? "happy\n" : "sad\n");
-
-		for (int i = 0; i < N + 2; i++)
-			adj[i].clear();
+		fill(adj, adj + N + 2, vector<int>());
 	}
 }
