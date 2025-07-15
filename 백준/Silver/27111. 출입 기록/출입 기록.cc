@@ -13,7 +13,7 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N, cnt = 0;
-unordered_map<int, int> um;
+vector<bool> v(200005);
 //=========================//
 
 int main() {
@@ -28,15 +28,16 @@ int main() {
 	int a, b;
 	while (N--) {
 		cin >> a >> b;
-		if (b == 1 && um[a]) // 나온 기록 누락
+		if (b && v[a]) // 나온 기록 누락
 			cnt++;
-		else if (b == 0 && !um[a]) // 들어간 기록 누락
+		else if (!b && !v[a]) // 들어간 기록 누락
 			cnt++;
-		um[a] = b;
+		v[a] = b;
 	}
 
-	for (auto [a, b] : um)
-		cnt += um[a]; // 1이면 나온 기록 누락
+
+	for (int i = 1; i < v.size(); i++)
+		cnt += v[i]; // 1이면 나온 기록 누락
 
 	cout << cnt;
 }
