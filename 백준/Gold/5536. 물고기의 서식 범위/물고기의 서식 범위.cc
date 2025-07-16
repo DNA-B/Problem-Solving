@@ -79,7 +79,7 @@ int main() {
 				imos[x][y][d] += imos[x][y][d - 1];
 
 
-	ll total_volume = 0;
+	ll total = 0;
 	for (int x = 0; x < X.size() - 1; x++) {
 		for (int y = 0; y < Y.size() - 1; y++) {
 			for (int d = 0; d < D.size() - 1; d++) {
@@ -87,11 +87,11 @@ int main() {
 					ll x_len = X[x + 1] - X[x];
 					ll y_len = Y[y + 1] - Y[y];
 					ll d_len = D[d + 1] - D[d];
-					total_volume += x_len * y_len * d_len;
+					total += x_len * y_len * d_len;
 				}
 			}
 		}
 	}
 
-	cout << total_volume << '\n';
+	cout << total;
 }
