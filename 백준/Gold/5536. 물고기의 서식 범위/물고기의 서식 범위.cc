@@ -18,6 +18,13 @@ vector<int> X, Y, D;
 vector<tuple<int, int, int, int, int, int>> v;
 //=========================//
 
+void proc_imos(int x, int y, int d) {
+	for (int i = x; i < X.size(); i++)
+		for (int j = y; j < Y.size(); j++)
+			for (int k = d; k < D.size(); k++)
+				imos[i][j][k] += imos[i - x][j - y][k - d];
+}
+
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
 #ifdef _DEBUG
@@ -63,21 +70,9 @@ int main() {
 		imos[rx2][ry2][rd2] -= 1;
 	}
 
-	for (int x = 1; x < X.size(); x++) // X
-		for (int y = 0; y < Y.size(); y++)
-			for (int d = 0; d < D.size(); d++)
-				imos[x][y][d] += imos[x - 1][y][d];
-
-	for (int x = 0; x < X.size(); x++) // Y
-		for (int y = 1; y < Y.size(); y++)
-			for (int d = 0; d < D.size(); d++)
-				imos[x][y][d] += imos[x][y - 1][d];
-
-	for (int x = 0; x < X.size(); x++) // D
-		for (int y = 0; y < Y.size(); y++)
-			for (int d = 1; d < D.size(); d++)
-				imos[x][y][d] += imos[x][y][d - 1];
-
+	proc_imos(1, 0, 0); // X
+	proc_imos(0, 1, 0); // Y
+	proc_imos(0, 0, 1); // D
 
 	ll total = 0;
 	for (int x = 0; x < X.size() - 1; x++) {
