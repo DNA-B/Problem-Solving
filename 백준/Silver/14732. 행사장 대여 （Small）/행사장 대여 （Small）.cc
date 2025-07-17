@@ -13,8 +13,16 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N;
-int board[505][505];
+int imos[505][505];
+vector<tuple<int, int, int, int>> v;
 //=========================//
+
+void proc_imos(int x, int y) {
+	for (int i = x; i <= 500; i++) {
+		for (int j = y; j <= 500; j++)
+			imos[i][j] += imos[i - x][j - y];
+	}
+}
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
@@ -28,16 +36,20 @@ int main() {
 	int x1, y1, x2, y2;
 	while (N--) {
 		cin >> x1 >> y1 >> x2 >> y2;
-		for (int i = x1; i < x2; i++) {
-			for (int j = y1; j < y2; j++)
-				board[i][j] = 1;
-		}
+		v.push_back({ x1, y1, x2, y2 });
+		imos[x1][y1]++;
+		imos[x1][y2]--;
+		imos[x2][y1]--;
+		imos[x2][y2]++;
 	}
 
+    proc_imos(1, 0);
+    proc_imos(0, 1);
+    
 	int total = 0;
 	for (int i = 0; i <= 500; i++) {
 		for (int j = 0; j <= 500; j++)
-			total += board[i][j];
+			if (imos[i][j]) total++;
 	}
 
 	cout << total;
