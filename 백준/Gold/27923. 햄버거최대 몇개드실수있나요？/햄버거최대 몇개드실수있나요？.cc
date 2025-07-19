@@ -47,7 +47,7 @@ int main() {
 		ll cur_ham = ham.top(); ham.pop();
 		ll cur_imos = imos_pq.top(); imos_pq.pop();
 		if (cur_imos >= 30) continue;
-		m += cur_ham / pow(2, cur_imos);
+		m += cur_ham / (1 << cur_imos);
 	}
 
 	cout << m;
