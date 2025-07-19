@@ -13,8 +13,7 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N, K, L;
-int imos[400005];
-priority_queue<int> ham, imos_pq;
+int ham[200005], imos[400005];
 //=========================//
 
 int main() {
@@ -26,28 +25,24 @@ int main() {
 
 	cin >> N >> K >> L;
 
-	for (int x, i = 1; i <= N; i++) {
-		cin >> x;
-		ham.push(x);
-	}
+	for (int x, i = 1; i <= N; i++)
+		cin >> ham[i];
 
 	for (int x, i = 0; i < K; i++) {
 		cin >> x;
-		imos[x]++;
-		imos[x + L]--;
+		imos[x]++; imos[x + L]--;
 	}
 
-	for (int i = 1; i <= N; i++) {
+	for (int i = 1; i <= N; i++)
 		imos[i] += imos[i - 1];
-		imos_pq.push(imos[i]);
-	}
+
+	sort(ham + 1, ham + N + 1, greater<int>());
+	sort(imos + 1, imos + N + 1, greater<int>());
 
 	ll m = 0;
 	for (int i = 1; i <= N; i++) {
-		ll cur_ham = ham.top(); ham.pop();
-		ll cur_imos = imos_pq.top(); imos_pq.pop();
-		if (cur_imos >= 30) continue;
-		m += cur_ham / (1 << cur_imos);
+		if (imos[i] >= 30) continue;
+		m += ham[i] / (1LL << imos[i]);
 	}
 
 	cout << m;
