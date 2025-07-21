@@ -54,7 +54,7 @@ int main() {
 
 	for (int u, v, d, i = 0; i < M; i++) {
 		cin >> u >> v >> d;
-		if ((mw[u] == 'W' && mw[v] == 'M') || (mw[u] == 'M' && mw[v] == 'W'))
+		if (mw[u] != mw[v])
 			adj.push_back({ d, u, v });
 	}
 
