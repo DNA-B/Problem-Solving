@@ -14,7 +14,7 @@ using namespace std;
 //======= VARIABLEs =======//
 int N;
 double mx = -1.0;
-double arr[10005];
+double mem[10005], arr[10005];
 //=========================//
 
 int main() {
@@ -26,18 +26,12 @@ int main() {
 
 	cin >> N;
 
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++)
 		cin >> arr[i];
-		mx = max(mx, arr[i]);
-	}
 
-	for (int i = 0; i < N - 1; i++) {
-		double cur = arr[i];
-		for (int j = i + 1; j < N; j++) {
-			cur *= arr[j];
-			mx = max(mx, cur);
-		}
-	}
+	mem[0] = arr[0];
+	for (int i = 1; i < N; i++)
+		mem[i] = max(mem[i - 1] * arr[i], arr[i]);
 
-	cout << fixed << setprecision(3) << mx;
+	cout << fixed << setprecision(3) << *max_element(mem, mem + N);
 }
