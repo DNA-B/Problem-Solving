@@ -12,8 +12,9 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
+const int MAX = 100005;
 int N;
-int imos[100005];
+ll imos[MAX];
 vector<pair<int, int>> queries;
 //=========================//
 
@@ -37,23 +38,23 @@ int main() {
 	string t1, t2;
 	while (N--) {
 		cin >> order >> t1 >> t2;
-		int st = get_time(t1);
-		int en = get_time(t2);
+		int st = get_time(t1) + 1; // st가 0이면 누적합 구할 때 인덱스 -1에 접근할 수 있으므로 +1해서 계산
+		int en = get_time(t2) + 1;
 		if (order == 1) {
-			imos[st + 1]++; // st가 0이면 누적합 구할 때 인덱스 -1에 접근할 수 있으므로 +1해서 계산
-			imos[en + 1]--;
+			imos[st]++;
+			imos[en]--;
 		}
 		else if (order == 2) {
 			queries.push_back({ st, en });
 		}
 	}
 
-	for (int i = 1; i <= 100000; i++) // imos 후처리
+	for (int i = 1; i < MAX; i++) // imos 후처리
 		imos[i] += imos[i - 1];
 
-	for (int i = 1; i <= 100000; i++) // imos 누적합
+	for (int i = 1; i < MAX; i++) // imos 누적합
 		imos[i] += imos[i - 1];
 
 	for (auto& [st, en] : queries)
-		cout << imos[en] - imos[st] << '\n';
+		cout << imos[en - 1] - imos[st - 1] << '\n';
 }
