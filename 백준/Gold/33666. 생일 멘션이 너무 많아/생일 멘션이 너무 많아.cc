@@ -38,23 +38,21 @@ int main() {
 
 	am = (cnt == 0) ? 0 : total / cnt;
 
+    if (am > M) {
+        cout << -1;
+        exit(0);
+    }
+    
 	for (int i = 1; i <= N; i++) {
 		if (mentions[i] <= am) {
-			if (mentions[i] > M) {
-				cout << -1;
-				exit(0);
-			}
-			else {
-				imos[1]++;
-				imos[mentions[i] + 1]--;
-			}
+			imos[1]++;
+			imos[mentions[i] + 1]--;
 		}
 		else {
 			imos[1]++;
 			imos[2]--;
 		}
 	}
-
 
 	for (int i = 1; i <= M; i++) {
 		imos[i] += imos[i - 1];
