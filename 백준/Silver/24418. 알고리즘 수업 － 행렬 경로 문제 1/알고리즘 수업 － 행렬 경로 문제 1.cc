@@ -13,16 +13,9 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N, cnt = 0;
-ll mem[16][16];
+int arr[20][20];
+ll mem[40][20];
 //=========================//
-
-int matrix_path_rec(int i, int j) {
-	if (i == 0 || j == 0) {
-		cnt++;
-		return 0;
-	}
-	return mem[i][j] + max(matrix_path_rec(i - 1, j), matrix_path_rec(i, j - 1));
-}
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
@@ -35,9 +28,21 @@ int main() {
 
 	for (int i = 1; i <= N; i++) {
 		for (int j = 1; j <= N; j++)
-			cin >> mem[i][j];
+			cin >> arr[i][j];
 	}
 
-	matrix_path_rec(N, N);
-	cout << cnt << ' ' << N * N;
+	mem[0][0] = 1;
+	mem[1][0] = 1;
+	mem[1][1] = 1;
+
+	for (int i = 2; i <= 2 * N; i++) {
+		for (int j = 0; j <= i; j++) {
+			if (j == 0 || j == i)
+				mem[i][j] = 1;
+			else
+				mem[i][j] = mem[i - 1][j - 1] + mem[i - 1][j];
+		}
+	}
+
+	cout << mem[2 * N][N] << ' ' << N * N;
 }
