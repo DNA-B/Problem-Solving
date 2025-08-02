@@ -14,7 +14,7 @@ using namespace std;
 //======= VARIABLEs =======//
 int N;
 ll res = 0;
-vector<int> xs, ys;
+unordered_map<int, int> xs, ys;
 vector<pair<int, int>> xy;
 //=========================//
 
@@ -31,16 +31,13 @@ int main() {
 	while (N--) {
 		cin >> x >> y;
 		xy.push_back({ x, y });
-		xs.push_back(x);
-		ys.push_back(y);
+		xs[x]++;
+		ys[y]++;
 	}
 
-	sort(xs.begin(), xs.end());
-	sort(ys.begin(), ys.end());
-
 	for (auto& [x, y] : xy) {
-		ll nx = upper_bound(xs.begin(), xs.end(), x) - lower_bound(xs.begin(), xs.end(), x) - 1;
-		ll ny = upper_bound(ys.begin(), ys.end(), y) - lower_bound(ys.begin(), ys.end(), y) - 1;
+		ll nx = xs[x] - 1;
+		ll ny = ys[y] - 1;
 		res += nx * ny;
 	}
 
