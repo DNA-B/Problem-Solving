@@ -12,20 +12,20 @@ using namespace std;
 //=========================//
 
 //======= VARIABLEs =======//
-int N, M, root, res = 0, mn = INT_MAX;
+int N, M, root;
 vector<int> adj[100005];
 int vis[100005], chk[100005];
-unordered_map<int, int> emp;
 //=========================//
 
-void dfs(int cur) {
-	for (int nxt : adj[cur]) {
-		if (!vis[nxt]) {
-			vis[nxt] = vis[cur] + chk[cur];
-			mn = min(mn, vis[nxt]);
-			dfs(nxt);
-		}
-	}
+int dfs(int cur) {
+	if (chk[cur])
+		return 1;
+
+	int res = 0;
+	for (int nxt : adj[cur])
+		res += dfs(nxt);
+
+	return res;
 }
 
 int main() {
@@ -40,11 +40,8 @@ int main() {
 	int x;
 	for (int i = 1; i <= N; i++) {
 		cin >> x;
-		if (x == 0) {
-			root = i;
-			continue;
-		}
-		adj[x].push_back(i);
+		if (x == 0) root = i;
+		else adj[x].push_back(i);
 	}
 
 	for (int i = 1; i <= M; i++) {
@@ -52,18 +49,5 @@ int main() {
 		chk[x] = 1;
 	}
 
-	if (chk[root]) { // CEO가 참석하면 무조건 그 사람이 낸다.
-		cout << 1;
-		exit(0);
-	}
-
-	vis[root] = 1;
-	dfs(root);
-
-	for (int i = 1; i <= N; i++) {
-		if (vis[i] == mn && chk[i])
-			res++;
-	}
-
-	cout << res;
+	cout << dfs(root);
 }
