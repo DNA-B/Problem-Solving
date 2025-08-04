@@ -16,6 +16,20 @@ int T, N, M;
 int board[105][105], zboard[105][105][5];
 //=========================//
 
+pair<int, int> zip_proc(int x, int y) {
+	int mn = INF, mn_abs = INF, idx = -1;
+	for (int k = 0; k < 5; k++) {
+		int v = board[x][y] - zboard[x][y][k];
+		if (abs(v) < mn_abs) {
+			mn_abs = abs(v);
+			mn = v;
+			idx = k;
+		}
+	}
+
+	return { idx, mn };
+}
+
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
 #ifdef _DEBUG
@@ -42,18 +56,10 @@ int main() {
 				zboard[i][j][3] = (A + B) / 2;
 				zboard[i][j][4] = A + B - C;
 
-				int mn = INF, mn_abs = INF, idx = -1;
-				for (int k = 0; k < 5; k++) {
-					int v = board[i][j] - zboard[i][j][k];
-					if (abs(v) < mn_abs) {
-						mn_abs = abs(v);
-						mn = v;
-						idx = k;
-					}
-				}
-
-				cout << idx << ' ' << mn << (j < M - 1 ? ' ' : '\n');
+				auto [idx, mn] = zip_proc(i, j);
+				cout << idx << ' ' << mn << ' ';
 			}
+			cout << '\n';
 		}
 	}
 }
