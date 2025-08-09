@@ -23,7 +23,7 @@ void solve(int cur, int idx, int cnt) {
 		mn = min(mn, cnt);
 		return;
 	}
-	if (cnt == N)
+	if (cnt == N || cnt > mn)
 		return;
 
 	for (int i = idx; i < N; i++) {
