@@ -26,28 +26,28 @@ int main() {
 
 	cin >> N >> K >> X;
 
-	for (int i = 0; i < N; i++)
+	for (int i = 1; i <= N; i++)
 		cin >> A[i] >> B[i];
 
 
 	mem[0][0][0] = true;
 
 	int maxA = K * X;
-	for (int i = 0; i < N; ++i) {
+	for (int i = 1; i <= N; i++) {
 		for (int j = 0; j <= min(i, K); j++) {
 			for (int total = 0; total <= maxA; total++) {
-				if (!mem[i][j][total])
+				if (!mem[i - 1][j][total])
 					continue;
 
-				mem[i + 1][j][total] = true;
-				if ((j + 1 <= K) && (total + A[i] <= maxA))
-					mem[i + 1][j + 1][total + A[i]] = true;
+				mem[i][j][total] = true;
+				if (total + A[i] <= maxA)
+					mem[i][j + 1][total + A[i]] = true;
 			}
 		}
 	}
 
 	int res = -1;
-	for (int total = 0; total <= maxA; ++total) {
+	for (int total = 0; total <= maxA; total++) {
 		if (mem[N][K][total]) {
 			int val = total * ((K * X) - total);
 			res = max(res, val);
