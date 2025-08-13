@@ -13,18 +13,8 @@ using namespace std;
 
 //======= VARIABLEs =======//
 int N;
-int vis[105];
-vector<int> adj[105];
+int outdegree[105];
 //=========================//
-
-void dfs(int cur) {
-	for (int nxt : adj[cur]) {
-		if (!vis[nxt]) {
-			vis[nxt] = 1;
-			dfs(nxt);
-		}
-	}
-}
 
 int main() {
 	cin.tie(nullptr)->ios_base::sync_with_stdio(false);
@@ -38,17 +28,15 @@ int main() {
 	int u, v;
 	for (int i = 0; i < N; i++) {
 		cin >> u >> v;
-		adj[v].push_back(u);
+		outdegree[u]++;
 	}
 
-	for (int i = 1; i <= N; i++) {
-		memset(vis, 0, sizeof(vis));
-		vis[i] = 1; dfs(i);
-		if (count(vis + 1, vis + N + 1, 1) == N) {
-			cout << i;
-			exit(0);
-		}
+	int cnt = count(outdegree + 1, outdegree + (N + 1), 0);
+
+	if (cnt != 1) {
+		cout << -1;
+		exit(0);
 	}
 
-	cout << -1;
+	cout << find(outdegree + 1, outdegree + (N + 1), 0) - outdegree;
 }
