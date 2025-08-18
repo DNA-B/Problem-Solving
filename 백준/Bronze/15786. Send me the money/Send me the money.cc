@@ -14,22 +14,18 @@ using namespace std;
 //======= VARIABLEs =======//
 int N, M;
 string mem;
-string notes[1005];
 //=========================//
 
 bool check(string s) {
-	int prev = -1, cnt = 0;
-	for (int i = 0; i < N; i++) {
-		for (int j = prev + 1; j < s.length(); j++) {
-			if (s[j] == mem[i]) {
-				cnt++;
-				prev = j;
-				break;
-			}
-		}
+	int idx = 0;
+	for (int i = 0; i < s.length(); i++) {
+		if (s[i] == mem[idx])
+			idx++;
+		if (idx == mem.length())
+			return true;
 	}
 
-	return cnt == N;
+	return false;
 }
 
 int main() {
@@ -41,9 +37,10 @@ int main() {
 
 	cin >> N >> M >> mem;
 
-	for (int i = 0; i < M; i++)
-		cin >> notes[i];
+	string tmp;
+	for (int i = 0; i < M; i++) {
+		cin >> tmp;
+		cout << (check(tmp) ? "true" : "false") << '\n';
 
-	for (int i = 0; i < M; i++)
-		cout << (check(notes[i]) ? "true" : "false") << '\n';
+	}
 }
