@@ -62,7 +62,7 @@ int main() {
 		for (int j = 0; j < N; j++) {
 			cin >> board[i][j];
 			if (board[i][j] == 9)
-				cur_x = i, cur_y = j;
+				tie(cur_x, cur_y) = { i, j };
 			else if (board[i][j] != 0)
 				fish.push_back({ i, j, board[i][j] });
 		}
@@ -86,15 +86,14 @@ int main() {
 		if (mn_time == INT_MAX)
 			break;
 
+		total_time += mn_time;
 		is_eated[eated_fist.X][eated_fist.Y] = 1;
-		cur_x = eated_fist.X;
-		cur_y = eated_fist.Y;
+		tie(cur_x, cur_y) = eated_fist;
 		cur_eat++;
 		if (cur_eat == cur_size) {
 			cur_size++;
 			cur_eat = 0;
 		}
-		total_time += mn_time;
 	}
 
 	cout << total_time;
