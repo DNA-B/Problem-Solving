@@ -13,22 +13,17 @@ using namespace std;
 
 //======= VARIABLEs =======//
 const ll MOD = 1000000007;
-ll M, N, S;
-vector<pair<ll, ll>> dices;
+int M, N, S;
 //=========================//
 
-ll gcd(ll a, ll b) {
-	return b ? gcd(b, a % b) : a;
-}
-
-ll fpow(ll n, ll m) {
-	ll ret = 1;
-	while (m) {
-		if (m & 1) ret = ret * n % MOD;
-		m /= 2;
-		n = n * n % MOD;
-	}
-	return ret;
+ll fpow(ll a, ll b) {
+	a %= MOD;
+	if (b == 0)
+		return 1;
+	else if (b & 1)
+		return a * fpow(a * a % MOD, b / 2) % MOD;
+	else
+		return fpow(a * a % MOD, b / 2) % MOD;
 }
 
 ll imod(ll x) {
@@ -47,8 +42,6 @@ int main() {
 	ll res = 0;
 	while (M--) {
 		cin >> N >> S;
-		ll g = gcd(N, S);
-		N /= g, S /= g;
 		res = (res + (S * imod(N) % MOD)) % MOD;
 	}
 
