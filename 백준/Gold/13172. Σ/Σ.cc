@@ -17,13 +17,14 @@ int M, N, S;
 //=========================//
 
 ll fpow(ll a, ll b) {
-	a %= MOD;
-	if (b == 0)
-		return 1;
-	else if (b & 1)
-		return a * fpow(a * a % MOD, b / 2) % MOD;
-	else
-		return fpow(a * a % MOD, b / 2) % MOD;
+	ll res = 1;
+	while (b > 0) {
+		if (b & 1) res = res * a % MOD;
+		a = a * a % MOD;
+		b >>= 1;
+	}
+
+	return res;
 }
 
 ll imod(ll x) {
