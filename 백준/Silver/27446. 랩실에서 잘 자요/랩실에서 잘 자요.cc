@@ -32,7 +32,7 @@ int main() {
 
 	for (int i = 1; i <= N; i++) {
 		mem[i] = mem[i - 1] + (chk[i] ? 0 : 7);
-		for (int j = 1; j <= i; j++)
+		for (int j = 1; j < i; j++)
 			mem[i] = min(mem[i], mem[j - 1] + 5 + (2 * (i - j + 1)));
 	}
 
