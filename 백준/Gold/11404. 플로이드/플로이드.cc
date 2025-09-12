@@ -6,8 +6,7 @@ using namespace std;
 int d[101][101];
 int N, M;
 
-int main(void) 
-{
+int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
 
@@ -16,8 +15,7 @@ int main(void)
     for (int i = 1; i <= N; i++) // init
         fill(d[i], d[i] + 1 + N, INF);
     
-    while (M--) 
-    {
+    while (M--) {
         int a, b, c;
         cin >> a >> b >> c;
         d[a][b] = min(d[a][b], c);
@@ -25,18 +23,16 @@ int main(void)
 
     for (int i = 1; i <= N; i++) // 자기 자신 0으로
         d[i][i] = 0;
-
     
-    for (int k = 1; k <= N; k++)
-        for (int i = 1; i <= N; i++)
-            for (int j = 1; j <= N; j++)
-                d[i][j]=min(d[i][j],d[i][k]+d[k][j]);
+	for (int k = 1; k <= N; k++)
+		for (int st = 1; st <= N; st++) // i에서 j로 가는 경우
+			for (int en = 1; en <= N; en++)
+				if (d[st][en] > d[st][k] + d[k][en]) // k 거치는 경로가 더 작을 경우 갱신
+					d[st][en] = d[st][k] + d[k][en];
 
 
-    for (int i = 1; i <= N; i++) 
-    {
-        for (int j = 1; j <= N; j++) 
-        {
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j <= N; j++) {
             if (d[i][j] == INF)
                 cout << "0 ";
             else 
@@ -44,6 +40,4 @@ int main(void)
         }
         cout << '\n';
     }
-
-    return 0;
 }
