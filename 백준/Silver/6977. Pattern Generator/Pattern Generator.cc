@@ -22,28 +22,21 @@ int main() {
 	freopen("output.txt", "w", stdout);
 #endif // _DEBUG
 
-	int T; 
-    cin >> T;
+	cin >> T;
 
-    while(T--) {
-        int N, M; 
-        cin >> N >> M;
+	while (T--) {
+		int arr[105] = { 0, };
 
-        vector<int> v(N);
-        for(int i=0; i<M; i++) 
-            v[i] = 1;
+		cin >> N >> K;
+		fill(arr, arr + K, 1);
+		cout << "The bit patterns are\n";
 
-        cout << "The bit patterns are\n";
+		do {
+			for (int i = 0; i < N; i++)
+				cout << arr[i];
+			cout << '\n';
+		} while (prev_permutation(arr, arr + N));
 
-        while(true) {
-            for(int i=0; i<N; i++) 
-                cout << v[i];
-            cout << "\n";
-
-            if(!prev_permutation(v.begin(), v.end())) 
-                break;
-        }
-
-        cout << "\n";
-    }
+		cout << '\n';
+	}
 }
