@@ -16,29 +16,21 @@ int H, W, cnt = 0;
 char board[505][505];
 //=========================//
 
+
 void clean(int x, int y) {
-	for (int i = x + 1; i < H; i++) {
-		if (board[i][y] == '.')
-			break;
-		board[i][y] = '.';
-	}
+	int dx[4] = { 1, -1, 0, 0 };
+	int dy[4] = { 0, 0, 1, -1 };
 
-	for (int i = x - 1; i >= 0; i--) {
-		if (board[i][y] == '.')
-			break;
-		board[i][y] = '.';
-	}
+	board[x][y] = '.';
+	for (int dir = 0; dir < 4; dir++) {
+		int nx = x + dx[dir];
+		int ny = y + dy[dir];
 
-	for (int i = y + 1; i < W; i++) {
-		if (board[x][i] == '.')
-			break;
-		board[x][i] = '.';
-	}
-
-	for (int i = y - 1; i >= 0; i--) {
-		if (board[x][i] == '.')
-			break;
-		board[x][i] = '.';
+		while ((0 <= nx && nx < H && 0 <= ny && ny < W) && board[nx][ny] == '*') {
+			board[nx][ny] = '.';
+			nx += dx[dir];
+			ny += dy[dir];
+		}
 	}
 }
 
@@ -58,8 +50,12 @@ int main() {
 
 	for (int i = 1; i < H; i++) {
 		for (int j = 1; j < W; j++) {
-			if (board[i][j] == '*' && board[i - 1][j] == '*' && board[i + 1][j] == '*' && board[i][j - 1] == '*' && board[i][j + 1] == '*') {
-				board[i][j] = '.';
+			if (board[i][j] == '*' 
+                && board[i - 1][j] == '*' 
+                && board[i + 1][j] == '*' 
+                && board[i][j - 1] == '*' 
+                && board[i][j + 1] == '*') {
+                
 				clean(i, j);
 				cnt++;
 			}
