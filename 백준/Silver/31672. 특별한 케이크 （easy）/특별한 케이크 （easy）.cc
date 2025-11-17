@@ -15,7 +15,7 @@ using namespace std;
 //======= VARIABLEs =======//
 int N, M, B;
 vector<int> res;
-vector<tuple<int, set<int>, int>> statements; // (speaker, group, type)
+vector<tuple<int, set<int>, int>> statements; 
 //=========================//
 
 int main() {
@@ -26,7 +26,7 @@ int main() {
 #endif // _DEBUG
 
 	string dummy;
-	getline(cin, dummy); // "swi's cake is missing!"
+	getline(cin, dummy);
 
 	cin >> N;
 
