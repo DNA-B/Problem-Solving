@@ -48,13 +48,11 @@ int proc_SM() {
 		if (up_cnt == 3) {
 			cur += stock * MD[i];
 			stock = 0;
-            up_cnt = 0;
         }
 
 		if (down_cnt == 3) {
 			stock += cur / MD[i];
 			cur -= (cur / MD[i]) * MD[i];
-			down_cnt = 0;
 		}
 	}
 
