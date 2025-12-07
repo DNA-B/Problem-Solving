@@ -20,19 +20,19 @@ map<string, int> m;
 
 void solve(int idx) {
 	int len = XYZ[idx].length();
-	vector<int> comb(len, 1);
+	vector<int> comb(len);
 
 	for (int i = 0; i < K; i++)
-		comb[i] = 0;
+		comb[i] = 1;
 
 	do {
 		string tmp = "";
 		for (int i = 0; i < comb.size(); i++) {
-			if (comb[i] == 0)
+			if (comb[i])
 				tmp += XYZ[idx][i];
 		}
 		m[tmp]++;
-	} while (next_permutation(comb.begin(), comb.end()));
+	} while (prev_permutation(comb.begin(), comb.end()));
 }
 
 
