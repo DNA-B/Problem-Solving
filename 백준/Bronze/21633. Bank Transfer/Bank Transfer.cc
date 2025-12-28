@@ -24,6 +24,6 @@ int main() {
 #endif // _DEBUG
 
 	cin >> K;
-	charge = min(2000.0, max(charge, 25 + ((K / 25) * 0.25)));
+	charge = min(2000.0, max(charge, 25 + (K * 0.01)));
 	cout << fixed << setprecision(2) << charge;
 }
