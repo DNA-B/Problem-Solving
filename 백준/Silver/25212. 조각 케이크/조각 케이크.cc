@@ -32,8 +32,8 @@ void solve(int idx) {
 		return;
 
 	if (slt.size() > 1) {
-		ll l = lcm(slt[0], slt[1]);
-		for (int i = 2; i < slt.size(); i++)
+		ll l = slt[0];
+		for (int i = 1; i < slt.size(); i++)
 			l = lcm(l, slt[i]);
 
 		double mo = l, ja = 0;
