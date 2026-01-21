@@ -16,7 +16,7 @@ using namespace std;
 int N, M;
 ll T;
 ll A[1005], B[1005];
-vector<ll> sA, sB;
+vector<ll> vA, vB;
 //=========================//
 
 int main() {
@@ -40,7 +40,7 @@ int main() {
 		ll sum = 0;
 		for (int j = i; j < N; j++) {
 			sum += A[j];
-			sA.emplace_back(sum);
+			vA.push_back(sum);
 		}
 	}
 
@@ -48,16 +48,16 @@ int main() {
 		ll sum = 0;
 		for (int j = i; j < M; j++) {
 			sum += B[j];
-			sB.emplace_back(sum);
+			vB.push_back(sum);
 		}
 	}
 
-	sort(sA.begin(), sA.end());
-	sort(sB.begin(), sB.end());
+	sort(vA.begin(), vA.end());
+	sort(vB.begin(), vB.end());
 
 	ll res = 0;
-	for (ll sum : sA)
-		res += upper_bound(sB.begin(), sB.end(), T - sum) - lower_bound(sB.begin(), sB.end(), T - sum);
+	for (ll sum : vA)
+		res += upper_bound(vB.begin(), vB.end(), T - sum) - lower_bound(vB.begin(), vB.end(), T - sum);
 
 	cout << res;
 }
