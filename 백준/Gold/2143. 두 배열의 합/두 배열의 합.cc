@@ -16,7 +16,7 @@ using namespace std;
 int N, M;
 ll T;
 ll A[1005], B[1005];
-unordered_map<ll, int> mA, mB;
+vector<ll> sA, sB;
 //=========================//
 
 int main() {
@@ -40,7 +40,7 @@ int main() {
 		ll sum = 0;
 		for (int j = i; j < N; j++) {
 			sum += A[j];
-			mA[sum]++;
+			sA.emplace_back(sum);
 		}
 	}
 
@@ -48,15 +48,16 @@ int main() {
 		ll sum = 0;
 		for (int j = i; j < M; j++) {
 			sum += B[j];
-			mB[sum]++;
+			sB.emplace_back(sum);
 		}
 	}
 
+	sort(sA.begin(), sA.end());
+	sort(sB.begin(), sB.end());
+
 	ll res = 0;
-	for (auto [sum, cnt] : mA) {
-		if (mB.find(T - sum) != mB.end())
-			res += (1LL * cnt * mB[T - sum]);
-	}
+	for (ll sum : sA)
+		res += upper_bound(sB.begin(), sB.end(), T - sum) - lower_bound(sB.begin(), sB.end(), T - sum);
 
 	cout << res;
 }
