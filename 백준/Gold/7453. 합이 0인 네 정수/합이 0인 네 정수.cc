@@ -41,8 +41,8 @@ int main() {
 
 	ll res = 0;
 	for (int x : AB_sum) {
-		res += (upper_bound(CD_sum.begin(), CD_sum.end(), -x)
-				- lower_bound(CD_sum.begin(), CD_sum.end(), -x));
+		auto range = equal_range(CD_sum.begin(), CD_sum.end(), -x);
+		res += distance(range.X, range.Y);
 	}
 
 	cout << res;
