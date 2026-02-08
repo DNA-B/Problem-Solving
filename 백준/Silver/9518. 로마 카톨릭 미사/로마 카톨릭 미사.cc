@@ -15,14 +15,11 @@ using namespace std;
 //======= VARIABLEs =======//
 int R, S;
 char board[55][55];
-bool vis[55][55][55][55] = { 0, };
 int dx[] = { 1, -1, 0, 0, 1, 1, -1, -1 };
 int dy[] = { 0, 0, 1, -1, 1, -1, 1, -1 };
 //=========================//
 
 int check(int x, int y) {
-	memset(vis, 0, sizeof(vis));
-
 	if (x != -1 && y != -1)
 		board[x][y] = 'o';
 
@@ -38,11 +35,7 @@ int check(int x, int y) {
 						continue;
 					if (board[nx][ny] == '.')
 						continue;
-					if (vis[nx][ny][i][j] != 0)
-						continue;
 
-					vis[i][j][nx][ny] = 1;
-					vis[nx][ny][i][j] = 1;
 					cnt++;
 				}
 			}
@@ -52,7 +45,7 @@ int check(int x, int y) {
 	if (x != -1 && y != -1)
 		board[x][y] = '.';
 
-	return cnt;
+	return cnt / 2;
 }
 
 int main() {
